@@ -8,7 +8,7 @@ A running list of shipped artifacts. Each entry links to code and, where possibl
 
 ## Multimodal Co-Registration Pipeline
 
-Automated registration of in vivo two-photon z-stacks → ex vivo light-sheet 3D volumes → ex vivo Xenium 2D spatial transcriptomics slices, with a Qt5 QC application. Cut registration time from ~3 hours (experienced user) to ~1 hour (novice).
+Automated registration of in vivo two-photon z-stacks → ex vivo light-sheet 3D volumes / ex vivo Xenium 2D spatial transcriptomics slices, with a Qt5 QC application. Cut registration time from ~3 hours (experienced user) to ~1 hour (novice).
 
 - **Stack:** Python, image registration, Qt5, Claude Code
 - **Links:** *(add repo / demo link)*
@@ -20,12 +20,25 @@ LightGBM-based classifier (AUC > 0.95) on engineered intensity, morphology, shap
 - **Stack:** Python, LightGBM, MLflow, human-in-the-loop retraining
 - **Links:** *(add repo / demo link)*
 
-## SQL / MLOps Migration + 3D CNN Benchmark *(in progress)*
-
-Migrating the LightGBM retraining loop's flat-file storage to a Postgres-backed MLflow instance, then training a 3D CNN on the same labeled ROI patches for a direct LightGBM-vs-CNN comparison.
+## Decrosstalk between simultaneously imaged two-photon calcium imaging channels
 
 - **Stack:** PostgreSQL, MLflow, PyTorch
 - **Links:** *(add when public)*
+
+## Neuropil correction 
+
+## Quantification of visual responsiveness
+
+## GCaMP8 transgenic mouse line validation & characterization
+
+## DFF calculation for two-photon calcium imaging data
+
+## Python package for gene panel selection in 3D spatial transcriptomics
+
+## Online motion correction for beam-splitting two-photon imaging
+
+## Single cell z-drift QC for two-photon calcium imaging data
+
 
 <!--
 Template for a new entry:
