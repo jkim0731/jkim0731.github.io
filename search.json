@@ -4,7 +4,7 @@
     "href": "about.html",
     "title": "About",
     "section": "",
-    "text": "Hi, I’m a neuroscientist studying how the brain encodes, learns, and adapts. That started during my undergraduate and graduate researches on various brain disorders — PTSD, stroke, Alzheimer’s disease — then moved into sensory perception and learning. My current work is on the Cell Types & Learning project at Allen Institute / Neural Dynamics, linking spatial transcriptomics to in vivo neuronal activity during task learning.\nIncreasingly, that work involves building ML and agentic AI methods to make sense of large-scale, multimodal neuroscience data — image registration across modalities, ML-based quality control for segmentation data, and using AI coding agents (Claude Code) to build production pipelines.\nRecent focus areas:\n\nIn vivo two-photon imaging, spatial transcriptomics, and multimodal data integration (neuronal activity, behavior, gene expression profile)\nRole of inhibitory interneurons in sensory perception and learning\nBuilding image data processing, QC, and analysis pipelines\nGCaMP8 transgenic mice validation and characterization\nAgentic AI-assisted pipeline development (Claude Code)"
+    "text": "Hi, I’m a neuroscientist studying how the brain encodes, learns, and adapts. That started during my undergraduate and graduate researches on various brain disorders — PTSD, stroke, Alzheimer’s disease — then moved into sensory perception and learning. My current work is on the Cell Types & Learning project at Allen Institute / Neural Dynamics, linking spatial transcriptomics to in vivo neuronal activity during task learning.\nIncreasingly, that work involves developing algorithms for data acquisition, processing, and QC, deploying pipelines to scale, and building ML and agentic AI methods to make sense of large-scale, multimodal neuroscience data.\nRecent focus areas:\n\nIn vivo two-photon imaging, spatial transcriptomics, multimodal data integration (neuronal activity, behavior, gene expression profile)\nRole of inhibitory interneurons in sensory perception and learning\nBuilding image data processing, QC, and analysis pipelines\nGCaMP8 transgenic mice validation and characterization\nAgentic AI-assisted pipeline development"
   },
   {
     "objectID": "projects.html",
@@ -14,74 +14,95 @@
     "text": "A running list of shipped artifacts. Each entry links to code and, where possible, a short writeup or demo."
   },
   {
-    "objectID": "projects.html#multimodal-co-registration-pipeline",
-    "href": "projects.html#multimodal-co-registration-pipeline",
+    "objectID": "projects.html#automated-multimodal-co-registration",
+    "href": "projects.html#automated-multimodal-co-registration",
     "title": "Projects",
-    "section": "Multimodal Co-Registration Pipeline",
-    "text": "Multimodal Co-Registration Pipeline\nAutomated registration of in vivo two-photon z-stacks → ex vivo light-sheet 3D volumes / ex vivo Xenium 2D spatial transcriptomics slices, with a Qt5 QC application.\n\nStack: Python, image registration, Qt5, Claude Code\nLinks: (add repo / documentation link)"
+    "section": "Automated multimodal co-registration",
+    "text": "Automated multimodal co-registration\nAutomated co-registration pipeline for in vivo two-photon z-stacks ↔︎ ex vivo light-sheet 3D volumes / Xenium 2D spatial transcriptomics slices, with a Qt5 QC application.  - Stack: Python, 3D image registration, Qt5, Claude Code  - Links: (add repo / documentation link)"
   },
   {
-    "objectID": "projects.html#d-roi-quality-classifier",
-    "href": "projects.html#d-roi-quality-classifier",
+    "objectID": "projects.html#crosstalk-correction-in-beam-splitting-two-photon-microscopy",
+    "href": "projects.html#crosstalk-correction-in-beam-splitting-two-photon-microscopy",
     "title": "Projects",
-    "section": "3D ROI Quality Classifier",
-    "text": "3D ROI Quality Classifier\nLightGBM-based classifier on engineered intensity, morphology, shape, and context features, with a retraining architecture tracked in MLflow.\n\nStack: Python, LightGBM, MLflow, human-in-the-loop retraining\nLinks: (add repo / documentation link)"
+    "section": "Crosstalk correction in beam-splitting two-photon microscopy",
+    "text": "Crosstalk correction in beam-splitting two-photon microscopy\nDecrosstalk between simultaneously imaged two-photon calcium imaging channels.  - Links: (add repo / documentation link)"
   },
   {
-    "objectID": "projects.html#decrosstalk-between-simultaneously-imaged-two-photon-calcium-imaging-channels",
-    "href": "projects.html#decrosstalk-between-simultaneously-imaged-two-photon-calcium-imaging-channels",
+    "objectID": "projects.html#background-signal-contamination-correction",
+    "href": "projects.html#background-signal-contamination-correction",
     "title": "Projects",
-    "section": "Decrosstalk between simultaneously imaged two-photon calcium imaging channels",
-    "text": "Decrosstalk between simultaneously imaged two-photon calcium imaging channels\nData processing and correction for crosstalk between simultaneously imaged two-photon calcium imaging channels.\n\nStack: Python\nLinks: (add repo / documentation link)"
-  },
-  {
-    "objectID": "projects.html#neuropil-correction",
-    "href": "projects.html#neuropil-correction",
-    "title": "Projects",
-    "section": "Neuropil correction",
-    "text": "Neuropil correction\nData processing and correction for neuropil contamination in two-photon calcium imaging data.\n\nStack: Python\nLinks: (add repo / documentation link)"
-  },
-  {
-    "objectID": "projects.html#benchmarking-visual-responsiveness-quantification-methods",
-    "href": "projects.html#benchmarking-visual-responsiveness-quantification-methods",
-    "title": "Projects",
-    "section": "Benchmarking visual responsiveness quantification methods",
-    "text": "Benchmarking visual responsiveness quantification methods"
-  },
-  {
-    "objectID": "projects.html#gcamp8-transgenic-mouse-line-validation-characterization",
-    "href": "projects.html#gcamp8-transgenic-mouse-line-validation-characterization",
-    "title": "Projects",
-    "section": "GCaMP8 transgenic mouse line validation & characterization",
-    "text": "GCaMP8 transgenic mouse line validation & characterization"
+    "section": "Background signal contamination correction",
+    "text": "Background signal contamination correction\nCorrection protocol for per-cell neuropil contamination in two-photon calcium imaging data.  - Links: (add repo / documentation link)"
   },
   {
     "objectID": "projects.html#dff-calculation-for-two-photon-calcium-imaging-data",
     "href": "projects.html#dff-calculation-for-two-photon-calcium-imaging-data",
     "title": "Projects",
     "section": "DFF calculation for two-photon calcium imaging data",
-    "text": "DFF calculation for two-photon calcium imaging data"
-  },
-  {
-    "objectID": "projects.html#python-package-for-gene-panel-selection-in-3d-spatial-transcriptomics",
-    "href": "projects.html#python-package-for-gene-panel-selection-in-3d-spatial-transcriptomics",
-    "title": "Projects",
-    "section": "Python package for gene panel selection in 3D spatial transcriptomics",
-    "text": "Python package for gene panel selection in 3D spatial transcriptomics"
-  },
-  {
-    "objectID": "projects.html#online-motion-correction-for-beam-splitting-two-photon-imaging",
-    "href": "projects.html#online-motion-correction-for-beam-splitting-two-photon-imaging",
-    "title": "Projects",
-    "section": "Online motion correction for beam-splitting two-photon imaging",
-    "text": "Online motion correction for beam-splitting two-photon imaging"
+    "text": "DFF calculation for two-photon calcium imaging data\nFluorescence baseline estimation using iterative reweighted least squares (IRLS) and noise level matching, with a Qt5 QC application.  - Stack: Python, time series, IRLS, Qt5  - Links: (add repo / documentation link)"
   },
   {
     "objectID": "projects.html#single-cell-z-drift-qc-for-two-photon-calcium-imaging-data",
     "href": "projects.html#single-cell-z-drift-qc-for-two-photon-calcium-imaging-data",
     "title": "Projects",
     "section": "Single cell z-drift QC for two-photon calcium imaging data",
-    "text": "Single cell z-drift QC for two-photon calcium imaging data"
+    "text": "Single cell z-drift QC for two-photon calcium imaging data\nQuantification of single cell-level z-drift in two-photon calcium imaging data.  - Stack: Python, image registration  - Links: (add repo / documentation link)"
+  },
+  {
+    "objectID": "projects.html#online-motion-correction",
+    "href": "projects.html#online-motion-correction",
+    "title": "Projects",
+    "section": "Online motion correction",
+    "text": "Online motion correction\nImplementing online motion correction for beam-splitting two-photon imaging, based on the observation of brain swelling during hydration.  - Stack: MATLAB, Python, image registration  - Links: (add repo / documentation link)"
+  },
+  {
+    "objectID": "projects.html#gene-panel-selection-package-for-3d-spatial-transcriptomics",
+    "href": "projects.html#gene-panel-selection-package-for-3d-spatial-transcriptomics",
+    "title": "Projects",
+    "section": "Gene panel selection package for 3D spatial transcriptomics",
+    "text": "Gene panel selection package for 3D spatial transcriptomics\nPython package mfishtoolspy for gene panel selection in 3D spatial transcriptomics - a translation and extension of the R package (mFISHtools) into Python.  - Stack: Python, R, scRNA, spatial transcriptomics, cursor AI  - Links: (add repo / documentation link)"
+  },
+  {
+    "objectID": "projects.html#d-roi-quality-classifier",
+    "href": "projects.html#d-roi-quality-classifier",
+    "title": "Projects",
+    "section": "3D ROI Quality Classifier",
+    "text": "3D ROI Quality Classifier\nLightGBM-based classifier on engineered intensity, morphology, shape, and context features, with a retraining architecture tracked in MLflow. (3D HCR ROI)  - Stack: Python, LightGBM, MLflow, CellPose-SAM, feature engineering, human-in-the-loop retraining  - Links: (add repo / documentation link)"
+  },
+  {
+    "objectID": "projects.html#automated-pupil-tracking",
+    "href": "projects.html#automated-pupil-tracking",
+    "title": "Projects",
+    "section": "Automated pupil tracking",
+    "text": "Automated pupil tracking\nAutomated pupil tracking pipeline for two-photon imaging experiments. - Stack: DeepLabCut, LightningPose  - Links: (add repo / documentation link)"
+  },
+  {
+    "objectID": "projects.html#automated-whisker-object-touch-detection-in-3d-usc",
+    "href": "projects.html#automated-whisker-object-touch-detection-in-3d-usc",
+    "title": "Projects",
+    "section": "Automated whisker-object touch detection in 3D (USC)",
+    "text": "Automated whisker-object touch detection in 3D (USC)\nObject touch detection algorithm using 3D behavior monitoring data with occlusion handling.  - Stack: MATLAB, 3D behavior monitoring  - Links: (add repo / documentation link)"
+  },
+  {
+    "objectID": "projects.html#benchmarking-visual-responsiveness-quantification-methods",
+    "href": "projects.html#benchmarking-visual-responsiveness-quantification-methods",
+    "title": "Projects",
+    "section": "Benchmarking visual responsiveness quantification methods",
+    "text": "Benchmarking visual responsiveness quantification methods\nComparison of methods for quantifying visual responsiveness in neural data, proposing a more statistically robust alternative.  - Links: (add repo / documentation link)"
+  },
+  {
+    "objectID": "projects.html#gcamp8-transgenic-mouse-line-validation-characterization",
+    "href": "projects.html#gcamp8-transgenic-mouse-line-validation-characterization",
+    "title": "Projects",
+    "section": "GCaMP8 transgenic mouse line validation & characterization",
+    "text": "GCaMP8 transgenic mouse line validation & characterization\nValidation and characterization of new GCaMP8 transgenic mouse lines, including pan-inhibitory and soma-targeting pan-neuronal expression.  - Links: (add repo / documentation link)"
+  },
+  {
+    "objectID": "projects.html#functional-interaction-analysis",
+    "href": "projects.html#functional-interaction-analysis",
+    "title": "Projects",
+    "section": "Functional interaction analysis",
+    "text": "Functional interaction analysis\nQuantification of functional interactions between simultaneously recorded neurons.  - Links: (add repo / documentation link)"
   },
   {
     "objectID": "index.html",
