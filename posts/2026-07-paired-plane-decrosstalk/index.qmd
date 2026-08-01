@@ -2,7 +2,7 @@
 title: "Cleaning up optical crosstalk between simultaneously imaged planes in a two-photon mesoscope"
 description: "Detecting and correcting optical crosstalk between simultaneously imaged planes in a beam-splitting two-photon mesoscope — mutual-information estimation, single-beam ground-truth validation, and QC."
 author: "Jinho Kim"
-date: 2026-08-01
+date: 2026-07-31
 categories: [two-photon imaging, decrosstalk, methods]
 bibliography: references.bib
 csl: ieee.csl
