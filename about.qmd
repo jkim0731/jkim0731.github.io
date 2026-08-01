@@ -4,13 +4,14 @@ page-layout: article
 title-block-banner: false
 ---
 
-I'm a computational imaging scientist working at the intersection of microscopy, spatial transcriptomics, and machine learning. My background is in neuroscience imaging (in vivo two-photon, ex vivo light-sheet), and I'm building toward roles in imaging ML / computational biology / computational pathology at biotech and AI-for-bio companies.
+Hi, I'm a neuroscientist studying how the brain encodes, learns, and adapts. That started during my undergraduate and graduate researches on various brain disorders — PTSD, stroke, Alzheimer's disease — then moved into sensory perception and learning. My current work is on the [Cell Types & Learning project](https://www.allenneuraldynamics.org/projects/cell-types-learning) at Allen Institute / Neural Dynamics, linking spatial transcriptomics to _in vivo_ neuronal activity during task learning.
+
+Increasingly, that work involves building ML and agentic AI methods to make sense of large-scale, multimodal neuroscience data — image registration across modalities, ML-based quality control for segmentation data, and using AI coding agents (Claude Code) to build production pipelines.
 
 Recent focus areas:
 
-- Multimodal image registration across imaging modalities and scales
-- ML-based quality control for 3D segmentation/ROI data (LightGBM, human-in-the-loop retraining, MLflow)
-- Agentic-AI-assisted pipeline development (Claude Code)
-- Closing gaps toward computational pathology: whole-slide image tooling, foundation-model embeddings, MIL
-
-**Resume:** *(link a PDF here once finalized)*
+- In vivo two-photon imaging, spatial transcriptomics, and multimodal data integration (neuronal activity, behavior, gene expression profile)
+- Role of inhibitory interneurons in sensory perception and learning
+- Building image data processing, QC, and analysis pipelines
+- GCaMP8 transgenic mice validation and characterization
+- Agentic AI-assisted pipeline development (Claude Code)
