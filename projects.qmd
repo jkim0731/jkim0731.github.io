@@ -6,38 +6,61 @@ title-block-banner: false
 
 A running list of shipped artifacts. Each entry links to code and, where possible, a short writeup or demo.
 
-## Multimodal Co-Registration Pipeline
+# Image processing
+## Automated multimodal co-registration
+Automated co-registration pipeline for _in vivo_ two-photon z-stacks ↔ _ex vivo_ light-sheet 3D volumes / Xenium 2D spatial transcriptomics slices, with a Qt5 QC application. <br>
+- **Stack:** Python, 3D image registration, Qt5, Claude Code <br
+- **Links:** *(add repo / documentation link)*
 
-Automated registration of in vivo two-photon z-stacks → ex vivo light-sheet 3D volumes / ex vivo Xenium 2D spatial transcriptomics slices, with a Qt5 QC application. Cut registration time from ~3 hours (experienced user) to ~1 hour (novice).
+## Crosstalk correction in beam-splitting two-photon microscopy
+Decrosstalk between simultaneously imaged two-photon calcium imaging channels. <br>
+- **Links:** *(add repo / documentation link)*
 
-- **Stack:** Python, image registration, Qt5, Claude Code
-- **Links:** *(add repo / demo link)*
-
-## 3D ROI Quality Classifier
-
-LightGBM-based classifier (AUC > 0.95) on engineered intensity, morphology, shape, and context features, with a two-capsule inference/retraining architecture tracked in MLflow. Combined with the registration pipeline, improved downstream accuracy by ~15%.
-
-- **Stack:** Python, LightGBM, MLflow, human-in-the-loop retraining
-- **Links:** *(add repo / demo link)*
-
-## Decrosstalk between simultaneously imaged two-photon calcium imaging channels
-
-- **Stack:** PostgreSQL, MLflow, PyTorch
-- **Links:** *(add when public)*
-
-## Neuropil correction 
-
-## Quantification of visual responsiveness
-
-## GCaMP8 transgenic mouse line validation & characterization
+## Background signal contamination correction 
+Correction protocol for per-cell neuropil contamination in two-photon calcium imaging data. <br>
+- **Links:** *(add repo / documentation link)*
 
 ## DFF calculation for two-photon calcium imaging data
-
-## Python package for gene panel selection in 3D spatial transcriptomics
-
-## Online motion correction for beam-splitting two-photon imaging
+Fluorescence baseline estimation using iterative reweighted least squares (IRLS) and noise level matching, with a Qt5 QC application. <br>
+- **Stack:** Python, time series, IRLS, Qt5 <br>
+- **Links:** *(add repo / documentation link)*
 
 ## Single cell z-drift QC for two-photon calcium imaging data
+Quantification of single cell-level z-drift in two-photon calcium imaging data. <br>
+- **Stack:** Python, image registration <br>
+- **Links:** *(add repo / documentation link)*
+
+
+# Spatial transcriptomics
+## Gene panel selection package for 3D spatial transcriptomics
+Python package *mfishtoolspy* for gene panel selection in 3D spatial transcriptomics - a translation and extension of the R package (mFISHtools) into Python. <br>
+- **Stack:** Python, R, scRNA, spatial transcriptomics, cursor AI <br>
+- **Links:** *(add repo / documentation link)*
+
+## 3D ROI Quality Classifier
+LightGBM-based classifier on engineered intensity, morphology, shape, and context features, with a retraining architecture tracked in MLflow. (3D HCR ROI) <br>
+- **Stack:** Python, LightGBM, MLflow, CellPose-SAM, feature engineering, human-in-the-loop retraining <br>
+- **Links:** *(add repo / documentation link)*
+
+# Image acquisition
+## Online motion correction
+Implementing online motion correction for beam-splitting two-photon imaging, based on the observation of brain swelling during hydration. <br>
+- **Stack:** MATLAB, Python, image registration <br>
+- **Links:** *(add repo / documentation link)*
+
+# Neuroscientific data analysis
+## Benchmarking visual responsiveness quantification methods
+Comparison of methods for quantifying visual responsiveness in neural data, proposing a more statistically robust alternative. <br>
+- **Links:** *(add repo / documentation link)*
+
+## GCaMP8 transgenic mouse line validation & characterization
+Validation and characterization of new GCaMP8 transgenic mouse lines, including pan-inhibitory and soma-targeting pan-neuronal expression. <br>
+- **Links:** *(add repo / documentation link)*
+
+## Functional interaction analysis
+Quantification of functional interactions between simultaneously recorded neurons. <br>
+- **Links:** *(add repo / documentation link)*
+
 
 
 <!--
