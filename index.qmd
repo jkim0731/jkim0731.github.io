@@ -1,0 +1,20 @@
+---
+title: "Jinho Kim"
+subtitle: "Computational imaging · imaging ML · spatial omics"
+page-layout: full
+title-block-banner: false
+---
+
+I build computational pipelines and ML models for biological imaging — multimodal registration (in vivo two-photon ↔ ex vivo light-sheet ↔ spatial transcriptomics), 3D ROI quality classification, and increasingly, agentic-AI-assisted tooling for scientific data workflows.
+
+Currently a Scientist II at the Allen Institute for Neural Dynamics.
+
+**[See recent projects →](projects.qmd)**  ·  **[Read the blog →](blog.qmd)**
+
+---
+
+### Contact
+
+- Email: *(add)*
+- GitHub: *(add)*
+- LinkedIn: *(add)*

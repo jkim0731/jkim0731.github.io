@@ -1,0 +1,39 @@
+---
+title: "Projects"
+page-layout: article
+title-block-banner: false
+---
+
+A running list of shipped artifacts. Each entry links to code and, where possible, a short writeup or demo.
+
+## Multimodal Co-Registration Pipeline
+
+Automated registration of in vivo two-photon z-stacks → ex vivo light-sheet 3D volumes → ex vivo Xenium 2D spatial transcriptomics slices, with a Qt5 QC application. Cut registration time from ~3 hours (experienced user) to ~1 hour (novice).
+
+- **Stack:** Python, image registration, Qt5, Claude Code
+- **Links:** *(add repo / demo link)*
+
+## 3D ROI Quality Classifier
+
+LightGBM-based classifier (AUC > 0.95) on engineered intensity, morphology, shape, and context features, with a two-capsule inference/retraining architecture tracked in MLflow. Combined with the registration pipeline, improved downstream accuracy by ~15%.
+
+- **Stack:** Python, LightGBM, MLflow, human-in-the-loop retraining
+- **Links:** *(add repo / demo link)*
+
+## SQL / MLOps Migration + 3D CNN Benchmark *(in progress)*
+
+Migrating the LightGBM retraining loop's flat-file storage to a Postgres-backed MLflow instance, then training a 3D CNN on the same labeled ROI patches for a direct LightGBM-vs-CNN comparison.
+
+- **Stack:** PostgreSQL, MLflow, PyTorch
+- **Links:** *(add when public)*
+
+<!--
+Template for a new entry:
+
+## Project Name
+
+One or two sentences on what it does and the concrete result (a number is better than an adjective).
+
+- **Stack:** key tools/libraries
+- **Links:** repo · writeup · demo
+-->

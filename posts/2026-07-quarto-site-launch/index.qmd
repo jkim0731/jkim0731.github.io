@@ -1,0 +1,14 @@
+---
+title: "Setting up this site"
+date: 2026-07-07
+categories: [meta]
+description: "A short placeholder post — replace with your first real technical write-up."
+---
+
+This is a placeholder post. Good first posts for this site:
+
+- A walkthrough of the multimodal co-registration pipeline (two-photon → light-sheet → Xenium), with a figure or two and the QC app screenshot.
+- The LightGBM ROI classifier writeup — what features you engineered, the AUC, and the human-in-the-loop retraining loop.
+- A short "what I learned migrating flat-file storage to Postgres/MLflow" post, once that project lands — this doubles as evidence for the SQL gap.
+
+Keep each post short (500–900 words), lead with the result/figure, and link out to code.

@@ -1,0 +1,16 @@
+---
+title: "About"
+page-layout: article
+title-block-banner: false
+---
+
+I'm a computational imaging scientist working at the intersection of microscopy, spatial transcriptomics, and machine learning. My background is in neuroscience imaging (in vivo two-photon, ex vivo light-sheet), and I'm building toward roles in imaging ML / computational biology / computational pathology at biotech and AI-for-bio companies.
+
+Recent focus areas:
+
+- Multimodal image registration across imaging modalities and scales
+- ML-based quality control for 3D segmentation/ROI data (LightGBM, human-in-the-loop retraining, MLflow)
+- Agentic-AI-assisted pipeline development (Claude Code)
+- Closing gaps toward computational pathology: whole-slide image tooling, foundation-model embeddings, MIL
+
+**Resume:** *(link a PDF here once finalized)*
