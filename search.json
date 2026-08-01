@@ -1,0 +1,58 @@
+[
+  {
+    "objectID": "blog.html",
+    "href": "blog.html",
+    "title": "Blog",
+    "section": "",
+    "text": "Setting up this site\n\n\n\nmeta\n\n\n\nA short placeholder post — replace with your first real technical write-up.\n\n\n\n\n\nJul 7, 2026\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Jinho Kim",
+    "section": "",
+    "text": "I build computational pipelines and ML models for biological imaging — multimodal registration (in vivo two-photon ↔︎ ex vivo light-sheet ↔︎ spatial transcriptomics), 3D ROI quality classification, and increasingly, agentic-AI-assisted tooling for scientific data workflows.\nCurrently a Scientist II at the Allen Institute for Neural Dynamics.\nSee recent projects → · Read the blog →\n\n\nContact\n\nEmail: (add)\nGitHub: (add)\nLinkedIn: (add)"
+  },
+  {
+    "objectID": "posts/2026-07-quarto-site-launch/index.html",
+    "href": "posts/2026-07-quarto-site-launch/index.html",
+    "title": "Setting up this site",
+    "section": "",
+    "text": "This is a placeholder post. Good first posts for this site:\n\nA walkthrough of the multimodal co-registration pipeline (two-photon → light-sheet → Xenium), with a figure or two and the QC app screenshot.\nThe LightGBM ROI classifier writeup — what features you engineered, the AUC, and the human-in-the-loop retraining loop.\nA short “what I learned migrating flat-file storage to Postgres/MLflow” post, once that project lands — this doubles as evidence for the SQL gap.\n\nKeep each post short (500–900 words), lead with the result/figure, and link out to code."
+  },
+  {
+    "objectID": "projects.html",
+    "href": "projects.html",
+    "title": "Projects",
+    "section": "",
+    "text": "A running list of shipped artifacts. Each entry links to code and, where possible, a short writeup or demo."
+  },
+  {
+    "objectID": "projects.html#multimodal-co-registration-pipeline",
+    "href": "projects.html#multimodal-co-registration-pipeline",
+    "title": "Projects",
+    "section": "Multimodal Co-Registration Pipeline",
+    "text": "Multimodal Co-Registration Pipeline\nAutomated registration of in vivo two-photon z-stacks → ex vivo light-sheet 3D volumes → ex vivo Xenium 2D spatial transcriptomics slices, with a Qt5 QC application. Cut registration time from ~3 hours (experienced user) to ~1 hour (novice).\n\nStack: Python, image registration, Qt5, Claude Code\nLinks: (add repo / demo link)"
+  },
+  {
+    "objectID": "projects.html#d-roi-quality-classifier",
+    "href": "projects.html#d-roi-quality-classifier",
+    "title": "Projects",
+    "section": "3D ROI Quality Classifier",
+    "text": "3D ROI Quality Classifier\nLightGBM-based classifier (AUC &gt; 0.95) on engineered intensity, morphology, shape, and context features, with a two-capsule inference/retraining architecture tracked in MLflow. Combined with the registration pipeline, improved downstream accuracy by ~15%.\n\nStack: Python, LightGBM, MLflow, human-in-the-loop retraining\nLinks: (add repo / demo link)"
+  },
+  {
+    "objectID": "projects.html#sql-mlops-migration-3d-cnn-benchmark-in-progress",
+    "href": "projects.html#sql-mlops-migration-3d-cnn-benchmark-in-progress",
+    "title": "Projects",
+    "section": "SQL / MLOps Migration + 3D CNN Benchmark (in progress)",
+    "text": "SQL / MLOps Migration + 3D CNN Benchmark (in progress)\nMigrating the LightGBM retraining loop’s flat-file storage to a Postgres-backed MLflow instance, then training a 3D CNN on the same labeled ROI patches for a direct LightGBM-vs-CNN comparison.\n\nStack: PostgreSQL, MLflow, PyTorch\nLinks: (add when public)"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "I’m a computational imaging scientist working at the intersection of microscopy, spatial transcriptomics, and machine learning. My background is in neuroscience imaging (in vivo two-photon, ex vivo light-sheet), and I’m building toward roles in imaging ML / computational biology / computational pathology at biotech and AI-for-bio companies.\nRecent focus areas:\n\nMultimodal image registration across imaging modalities and scales\nML-based quality control for 3D segmentation/ROI data (LightGBM, human-in-the-loop retraining, MLflow)\nAgentic-AI-assisted pipeline development (Claude Code)\nClosing gaps toward computational pathology: whole-slide image tooling, foundation-model embeddings, MIL\n\nResume: (link a PDF here once finalized)"
+  }
+]
