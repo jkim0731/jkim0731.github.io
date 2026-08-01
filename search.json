@@ -18,7 +18,7 @@
     "href": "projects.html#multimodal-co-registration-pipeline",
     "title": "Projects",
     "section": "Multimodal Co-Registration Pipeline",
-    "text": "Multimodal Co-Registration Pipeline\nAutomated registration of in vivo two-photon z-stacks → ex vivo light-sheet 3D volumes → ex vivo Xenium 2D spatial transcriptomics slices, with a Qt5 QC application. Cut registration time from ~3 hours (experienced user) to ~1 hour (novice).\n\nStack: Python, image registration, Qt5, Claude Code\nLinks: (add repo / demo link)"
+    "text": "Multimodal Co-Registration Pipeline\nAutomated registration of in vivo two-photon z-stacks → ex vivo light-sheet 3D volumes / ex vivo Xenium 2D spatial transcriptomics slices, with a Qt5 QC application. Cut registration time from ~3 hours (experienced user) to ~1 hour (novice).\n\nStack: Python, image registration, Qt5, Claude Code\nLinks: (add repo / demo link)"
   },
   {
     "objectID": "projects.html#d-roi-quality-classifier",
@@ -28,18 +28,67 @@
     "text": "3D ROI Quality Classifier\nLightGBM-based classifier (AUC &gt; 0.95) on engineered intensity, morphology, shape, and context features, with a two-capsule inference/retraining architecture tracked in MLflow. Combined with the registration pipeline, improved downstream accuracy by ~15%.\n\nStack: Python, LightGBM, MLflow, human-in-the-loop retraining\nLinks: (add repo / demo link)"
   },
   {
-    "objectID": "projects.html#sql-mlops-migration-3d-cnn-benchmark-in-progress",
-    "href": "projects.html#sql-mlops-migration-3d-cnn-benchmark-in-progress",
+    "objectID": "projects.html#decrosstalk-between-simultaneously-imaged-two-photon-calcium-imaging-channels",
+    "href": "projects.html#decrosstalk-between-simultaneously-imaged-two-photon-calcium-imaging-channels",
     "title": "Projects",
-    "section": "SQL / MLOps Migration + 3D CNN Benchmark (in progress)",
-    "text": "SQL / MLOps Migration + 3D CNN Benchmark (in progress)\nMigrating the LightGBM retraining loop’s flat-file storage to a Postgres-backed MLflow instance, then training a 3D CNN on the same labeled ROI patches for a direct LightGBM-vs-CNN comparison.\n\nStack: PostgreSQL, MLflow, PyTorch\nLinks: (add when public)"
+    "section": "Decrosstalk between simultaneously imaged two-photon calcium imaging channels",
+    "text": "Decrosstalk between simultaneously imaged two-photon calcium imaging channels\n\nStack: PostgreSQL, MLflow, PyTorch\nLinks: (add when public)"
+  },
+  {
+    "objectID": "projects.html#neuropil-correction",
+    "href": "projects.html#neuropil-correction",
+    "title": "Projects",
+    "section": "Neuropil correction",
+    "text": "Neuropil correction"
+  },
+  {
+    "objectID": "projects.html#quantification-of-visual-responsiveness",
+    "href": "projects.html#quantification-of-visual-responsiveness",
+    "title": "Projects",
+    "section": "Quantification of visual responsiveness",
+    "text": "Quantification of visual responsiveness"
+  },
+  {
+    "objectID": "projects.html#gcamp8-transgenic-mouse-line-validation-characterization",
+    "href": "projects.html#gcamp8-transgenic-mouse-line-validation-characterization",
+    "title": "Projects",
+    "section": "GCaMP8 transgenic mouse line validation & characterization",
+    "text": "GCaMP8 transgenic mouse line validation & characterization"
+  },
+  {
+    "objectID": "projects.html#dff-calculation-for-two-photon-calcium-imaging-data",
+    "href": "projects.html#dff-calculation-for-two-photon-calcium-imaging-data",
+    "title": "Projects",
+    "section": "DFF calculation for two-photon calcium imaging data",
+    "text": "DFF calculation for two-photon calcium imaging data"
+  },
+  {
+    "objectID": "projects.html#python-package-for-gene-panel-selection-in-3d-spatial-transcriptomics",
+    "href": "projects.html#python-package-for-gene-panel-selection-in-3d-spatial-transcriptomics",
+    "title": "Projects",
+    "section": "Python package for gene panel selection in 3D spatial transcriptomics",
+    "text": "Python package for gene panel selection in 3D spatial transcriptomics"
+  },
+  {
+    "objectID": "projects.html#online-motion-correction-for-beam-splitting-two-photon-imaging",
+    "href": "projects.html#online-motion-correction-for-beam-splitting-two-photon-imaging",
+    "title": "Projects",
+    "section": "Online motion correction for beam-splitting two-photon imaging",
+    "text": "Online motion correction for beam-splitting two-photon imaging"
+  },
+  {
+    "objectID": "projects.html#single-cell-z-drift-qc-for-two-photon-calcium-imaging-data",
+    "href": "projects.html#single-cell-z-drift-qc-for-two-photon-calcium-imaging-data",
+    "title": "Projects",
+    "section": "Single cell z-drift QC for two-photon calcium imaging data",
+    "text": "Single cell z-drift QC for two-photon calcium imaging data"
   },
   {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Jinho Kim",
     "section": "",
-    "text": "I build computational pipelines and ML models for biological imaging — multimodal registration (in vivo two-photon ↔︎ ex vivo light-sheet ↔︎ spatial transcriptomics), 3D ROI quality classification, and increasingly, agentic-AI-assisted tooling for scientific data workflows. Currently a Scientist II at the Allen Institute for Neural Dynamics. See recent projects →"
+    "text": "About sensory perception and learning.  About inhibitory neurons and cortical circuits.  About image data and signal processing.\nAnd anything else that interests me.\nSee recent projects →"
   },
   {
     "objectID": "index.html#posts",

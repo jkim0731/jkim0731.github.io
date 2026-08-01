@@ -147,7 +147,14 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#multimodal-co-registration-pipeline" id="toc-multimodal-co-registration-pipeline" class="nav-link active" data-scroll-target="#multimodal-co-registration-pipeline">Multimodal Co-Registration Pipeline</a></li>
   <li><a href="#d-roi-quality-classifier" id="toc-d-roi-quality-classifier" class="nav-link" data-scroll-target="#d-roi-quality-classifier">3D ROI Quality Classifier</a></li>
-  <li><a href="#sql-mlops-migration-3d-cnn-benchmark-in-progress" id="toc-sql-mlops-migration-3d-cnn-benchmark-in-progress" class="nav-link" data-scroll-target="#sql-mlops-migration-3d-cnn-benchmark-in-progress">SQL / MLOps Migration + 3D CNN Benchmark <em>(in progress)</em></a></li>
+  <li><a href="#decrosstalk-between-simultaneously-imaged-two-photon-calcium-imaging-channels" id="toc-decrosstalk-between-simultaneously-imaged-two-photon-calcium-imaging-channels" class="nav-link" data-scroll-target="#decrosstalk-between-simultaneously-imaged-two-photon-calcium-imaging-channels">Decrosstalk between simultaneously imaged two-photon calcium imaging channels</a></li>
+  <li><a href="#neuropil-correction" id="toc-neuropil-correction" class="nav-link" data-scroll-target="#neuropil-correction">Neuropil correction</a></li>
+  <li><a href="#quantification-of-visual-responsiveness" id="toc-quantification-of-visual-responsiveness" class="nav-link" data-scroll-target="#quantification-of-visual-responsiveness">Quantification of visual responsiveness</a></li>
+  <li><a href="#gcamp8-transgenic-mouse-line-validation-characterization" id="toc-gcamp8-transgenic-mouse-line-validation-characterization" class="nav-link" data-scroll-target="#gcamp8-transgenic-mouse-line-validation-characterization">GCaMP8 transgenic mouse line validation &amp; characterization</a></li>
+  <li><a href="#dff-calculation-for-two-photon-calcium-imaging-data" id="toc-dff-calculation-for-two-photon-calcium-imaging-data" class="nav-link" data-scroll-target="#dff-calculation-for-two-photon-calcium-imaging-data">DFF calculation for two-photon calcium imaging data</a></li>
+  <li><a href="#python-package-for-gene-panel-selection-in-3d-spatial-transcriptomics" id="toc-python-package-for-gene-panel-selection-in-3d-spatial-transcriptomics" class="nav-link" data-scroll-target="#python-package-for-gene-panel-selection-in-3d-spatial-transcriptomics">Python package for gene panel selection in 3D spatial transcriptomics</a></li>
+  <li><a href="#online-motion-correction-for-beam-splitting-two-photon-imaging" id="toc-online-motion-correction-for-beam-splitting-two-photon-imaging" class="nav-link" data-scroll-target="#online-motion-correction-for-beam-splitting-two-photon-imaging">Online motion correction for beam-splitting two-photon imaging</a></li>
+  <li><a href="#single-cell-z-drift-qc-for-two-photon-calcium-imaging-data" id="toc-single-cell-z-drift-qc-for-two-photon-calcium-imaging-data" class="nav-link" data-scroll-target="#single-cell-z-drift-qc-for-two-photon-calcium-imaging-data">Single cell z-drift QC for two-photon calcium imaging data</a></li>
   </ul>
 </nav>
     </div>
@@ -176,7 +183,7 @@ ul.task-list li input[type="checkbox"] {
 <p>A running list of shipped artifacts. Each entry links to code and, where possible, a short writeup or demo.</p>
 <section id="multimodal-co-registration-pipeline" class="level2">
 <h2 class="anchored" data-anchor-id="multimodal-co-registration-pipeline">Multimodal Co-Registration Pipeline</h2>
-<p>Automated registration of in vivo two-photon z-stacks → ex vivo light-sheet 3D volumes → ex vivo Xenium 2D spatial transcriptomics slices, with a Qt5 QC application. Cut registration time from ~3 hours (experienced user) to ~1 hour (novice).</p>
+<p>Automated registration of in vivo two-photon z-stacks → ex vivo light-sheet 3D volumes / ex vivo Xenium 2D spatial transcriptomics slices, with a Qt5 QC application. Cut registration time from ~3 hours (experienced user) to ~1 hour (novice).</p>
 <ul>
 <li><strong>Stack:</strong> Python, image registration, Qt5, Claude Code</li>
 <li><strong>Links:</strong> <em>(add repo / demo link)</em></li>
@@ -190,13 +197,33 @@ ul.task-list li input[type="checkbox"] {
 <li><strong>Links:</strong> <em>(add repo / demo link)</em></li>
 </ul>
 </section>
-<section id="sql-mlops-migration-3d-cnn-benchmark-in-progress" class="level2">
-<h2 class="anchored" data-anchor-id="sql-mlops-migration-3d-cnn-benchmark-in-progress">SQL / MLOps Migration + 3D CNN Benchmark <em>(in progress)</em></h2>
-<p>Migrating the LightGBM retraining loop’s flat-file storage to a Postgres-backed MLflow instance, then training a 3D CNN on the same labeled ROI patches for a direct LightGBM-vs-CNN comparison.</p>
+<section id="decrosstalk-between-simultaneously-imaged-two-photon-calcium-imaging-channels" class="level2">
+<h2 class="anchored" data-anchor-id="decrosstalk-between-simultaneously-imaged-two-photon-calcium-imaging-channels">Decrosstalk between simultaneously imaged two-photon calcium imaging channels</h2>
 <ul>
 <li><strong>Stack:</strong> PostgreSQL, MLflow, PyTorch</li>
 <li><strong>Links:</strong> <em>(add when public)</em></li>
 </ul>
+</section>
+<section id="neuropil-correction" class="level2">
+<h2 class="anchored" data-anchor-id="neuropil-correction">Neuropil correction</h2>
+</section>
+<section id="quantification-of-visual-responsiveness" class="level2">
+<h2 class="anchored" data-anchor-id="quantification-of-visual-responsiveness">Quantification of visual responsiveness</h2>
+</section>
+<section id="gcamp8-transgenic-mouse-line-validation-characterization" class="level2">
+<h2 class="anchored" data-anchor-id="gcamp8-transgenic-mouse-line-validation-characterization">GCaMP8 transgenic mouse line validation &amp; characterization</h2>
+</section>
+<section id="dff-calculation-for-two-photon-calcium-imaging-data" class="level2">
+<h2 class="anchored" data-anchor-id="dff-calculation-for-two-photon-calcium-imaging-data">DFF calculation for two-photon calcium imaging data</h2>
+</section>
+<section id="python-package-for-gene-panel-selection-in-3d-spatial-transcriptomics" class="level2">
+<h2 class="anchored" data-anchor-id="python-package-for-gene-panel-selection-in-3d-spatial-transcriptomics">Python package for gene panel selection in 3D spatial transcriptomics</h2>
+</section>
+<section id="online-motion-correction-for-beam-splitting-two-photon-imaging" class="level2">
+<h2 class="anchored" data-anchor-id="online-motion-correction-for-beam-splitting-two-photon-imaging">Online motion correction for beam-splitting two-photon imaging</h2>
+</section>
+<section id="single-cell-z-drift-qc-for-two-photon-calcium-imaging-data" class="level2">
+<h2 class="anchored" data-anchor-id="single-cell-z-drift-qc-for-two-photon-calcium-imaging-data">Single cell z-drift QC for two-photon calcium imaging data</h2>
 <!--
 Template for a new entry:
 
