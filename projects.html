@@ -149,7 +149,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#d-roi-quality-classifier" id="toc-d-roi-quality-classifier" class="nav-link" data-scroll-target="#d-roi-quality-classifier">3D ROI Quality Classifier</a></li>
   <li><a href="#decrosstalk-between-simultaneously-imaged-two-photon-calcium-imaging-channels" id="toc-decrosstalk-between-simultaneously-imaged-two-photon-calcium-imaging-channels" class="nav-link" data-scroll-target="#decrosstalk-between-simultaneously-imaged-two-photon-calcium-imaging-channels">Decrosstalk between simultaneously imaged two-photon calcium imaging channels</a></li>
   <li><a href="#neuropil-correction" id="toc-neuropil-correction" class="nav-link" data-scroll-target="#neuropil-correction">Neuropil correction</a></li>
-  <li><a href="#quantification-of-visual-responsiveness" id="toc-quantification-of-visual-responsiveness" class="nav-link" data-scroll-target="#quantification-of-visual-responsiveness">Quantification of visual responsiveness</a></li>
+  <li><a href="#benchmarking-visual-responsiveness-quantification-methods" id="toc-benchmarking-visual-responsiveness-quantification-methods" class="nav-link" data-scroll-target="#benchmarking-visual-responsiveness-quantification-methods">Benchmarking visual responsiveness quantification methods</a></li>
   <li><a href="#gcamp8-transgenic-mouse-line-validation-characterization" id="toc-gcamp8-transgenic-mouse-line-validation-characterization" class="nav-link" data-scroll-target="#gcamp8-transgenic-mouse-line-validation-characterization">GCaMP8 transgenic mouse line validation &amp; characterization</a></li>
   <li><a href="#dff-calculation-for-two-photon-calcium-imaging-data" id="toc-dff-calculation-for-two-photon-calcium-imaging-data" class="nav-link" data-scroll-target="#dff-calculation-for-two-photon-calcium-imaging-data">DFF calculation for two-photon calcium imaging data</a></li>
   <li><a href="#python-package-for-gene-panel-selection-in-3d-spatial-transcriptomics" id="toc-python-package-for-gene-panel-selection-in-3d-spatial-transcriptomics" class="nav-link" data-scroll-target="#python-package-for-gene-panel-selection-in-3d-spatial-transcriptomics">Python package for gene panel selection in 3D spatial transcriptomics</a></li>
@@ -183,32 +183,38 @@ ul.task-list li input[type="checkbox"] {
 <p>A running list of shipped artifacts. Each entry links to code and, where possible, a short writeup or demo.</p>
 <section id="multimodal-co-registration-pipeline" class="level2">
 <h2 class="anchored" data-anchor-id="multimodal-co-registration-pipeline">Multimodal Co-Registration Pipeline</h2>
-<p>Automated registration of in vivo two-photon z-stacks → ex vivo light-sheet 3D volumes / ex vivo Xenium 2D spatial transcriptomics slices, with a Qt5 QC application. Cut registration time from ~3 hours (experienced user) to ~1 hour (novice).</p>
+<p>Automated registration of in vivo two-photon z-stacks → ex vivo light-sheet 3D volumes / ex vivo Xenium 2D spatial transcriptomics slices, with a Qt5 QC application.</p>
 <ul>
 <li><strong>Stack:</strong> Python, image registration, Qt5, Claude Code</li>
-<li><strong>Links:</strong> <em>(add repo / demo link)</em></li>
+<li><strong>Links:</strong> <em>(add repo / documentation link)</em></li>
 </ul>
 </section>
 <section id="d-roi-quality-classifier" class="level2">
 <h2 class="anchored" data-anchor-id="d-roi-quality-classifier">3D ROI Quality Classifier</h2>
-<p>LightGBM-based classifier (AUC &gt; 0.95) on engineered intensity, morphology, shape, and context features, with a two-capsule inference/retraining architecture tracked in MLflow. Combined with the registration pipeline, improved downstream accuracy by ~15%.</p>
+<p>LightGBM-based classifier on engineered intensity, morphology, shape, and context features, with a retraining architecture tracked in MLflow.</p>
 <ul>
 <li><strong>Stack:</strong> Python, LightGBM, MLflow, human-in-the-loop retraining</li>
-<li><strong>Links:</strong> <em>(add repo / demo link)</em></li>
+<li><strong>Links:</strong> <em>(add repo / documentation link)</em></li>
 </ul>
 </section>
 <section id="decrosstalk-between-simultaneously-imaged-two-photon-calcium-imaging-channels" class="level2">
 <h2 class="anchored" data-anchor-id="decrosstalk-between-simultaneously-imaged-two-photon-calcium-imaging-channels">Decrosstalk between simultaneously imaged two-photon calcium imaging channels</h2>
+<p>Data processing and correction for crosstalk between simultaneously imaged two-photon calcium imaging channels.</p>
 <ul>
-<li><strong>Stack:</strong> PostgreSQL, MLflow, PyTorch</li>
-<li><strong>Links:</strong> <em>(add when public)</em></li>
+<li><strong>Stack:</strong> Python</li>
+<li><strong>Links:</strong> <em>(add repo / documentation link)</em></li>
 </ul>
 </section>
 <section id="neuropil-correction" class="level2">
 <h2 class="anchored" data-anchor-id="neuropil-correction">Neuropil correction</h2>
+<p>Data processing and correction for neuropil contamination in two-photon calcium imaging data.</p>
+<ul>
+<li><strong>Stack:</strong> Python</li>
+<li><strong>Links:</strong> <em>(add repo / documentation link)</em></li>
+</ul>
 </section>
-<section id="quantification-of-visual-responsiveness" class="level2">
-<h2 class="anchored" data-anchor-id="quantification-of-visual-responsiveness">Quantification of visual responsiveness</h2>
+<section id="benchmarking-visual-responsiveness-quantification-methods" class="level2">
+<h2 class="anchored" data-anchor-id="benchmarking-visual-responsiveness-quantification-methods">Benchmarking visual responsiveness quantification methods</h2>
 </section>
 <section id="gcamp8-transgenic-mouse-line-validation-characterization" class="level2">
 <h2 class="anchored" data-anchor-id="gcamp8-transgenic-mouse-line-validation-characterization">GCaMP8 transgenic mouse line validation &amp; characterization</h2>

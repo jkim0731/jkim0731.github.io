@@ -329,6 +329,7 @@ window.Quarto = {
 <p>so <strong>α</strong> is the fraction of A’s own signal that leaks <em>out</em> into B, and <strong>β</strong> is the fraction of B that leaks <em>in</em> and contaminates A. Undoing the crosstalk is just inverting this 2×2 mixing matrix. The whole problem is estimating <strong>(α, β)</strong>.</p>
 <p>Note this is a <em>relative</em> crosstalk between two planes of different brightness — so the brightness imbalance between the planes matters, and α and β are generally not equal.</p>
 <p>Also note that this shares a fundamental principle with ICA; how the two differ in practice is discussed below.</p>
+<p>Lastly, applying the inverse mixing matrix not only removes crosstalk signal but also restores the plane’s own signal that was subtracted out by the crosstalk. The correction is therefore a <em>reconstruction</em> of the plane’s own signal, not just a subtraction of the paired plane’s ghost (<a href="#figure-7">Figure 7B</a>).</p>
 </section>
 <section id="estimating-α-β" class="level3">
 <h3 class="anchored" data-anchor-id="estimating-α-β">Estimating (α, β)</h3>

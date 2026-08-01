@@ -18,35 +18,35 @@
     "href": "projects.html#multimodal-co-registration-pipeline",
     "title": "Projects",
     "section": "Multimodal Co-Registration Pipeline",
-    "text": "Multimodal Co-Registration Pipeline\nAutomated registration of in vivo two-photon z-stacks → ex vivo light-sheet 3D volumes / ex vivo Xenium 2D spatial transcriptomics slices, with a Qt5 QC application. Cut registration time from ~3 hours (experienced user) to ~1 hour (novice).\n\nStack: Python, image registration, Qt5, Claude Code\nLinks: (add repo / demo link)"
+    "text": "Multimodal Co-Registration Pipeline\nAutomated registration of in vivo two-photon z-stacks → ex vivo light-sheet 3D volumes / ex vivo Xenium 2D spatial transcriptomics slices, with a Qt5 QC application.\n\nStack: Python, image registration, Qt5, Claude Code\nLinks: (add repo / documentation link)"
   },
   {
     "objectID": "projects.html#d-roi-quality-classifier",
     "href": "projects.html#d-roi-quality-classifier",
     "title": "Projects",
     "section": "3D ROI Quality Classifier",
-    "text": "3D ROI Quality Classifier\nLightGBM-based classifier (AUC &gt; 0.95) on engineered intensity, morphology, shape, and context features, with a two-capsule inference/retraining architecture tracked in MLflow. Combined with the registration pipeline, improved downstream accuracy by ~15%.\n\nStack: Python, LightGBM, MLflow, human-in-the-loop retraining\nLinks: (add repo / demo link)"
+    "text": "3D ROI Quality Classifier\nLightGBM-based classifier on engineered intensity, morphology, shape, and context features, with a retraining architecture tracked in MLflow.\n\nStack: Python, LightGBM, MLflow, human-in-the-loop retraining\nLinks: (add repo / documentation link)"
   },
   {
     "objectID": "projects.html#decrosstalk-between-simultaneously-imaged-two-photon-calcium-imaging-channels",
     "href": "projects.html#decrosstalk-between-simultaneously-imaged-two-photon-calcium-imaging-channels",
     "title": "Projects",
     "section": "Decrosstalk between simultaneously imaged two-photon calcium imaging channels",
-    "text": "Decrosstalk between simultaneously imaged two-photon calcium imaging channels\n\nStack: PostgreSQL, MLflow, PyTorch\nLinks: (add when public)"
+    "text": "Decrosstalk between simultaneously imaged two-photon calcium imaging channels\nData processing and correction for crosstalk between simultaneously imaged two-photon calcium imaging channels.\n\nStack: Python\nLinks: (add repo / documentation link)"
   },
   {
     "objectID": "projects.html#neuropil-correction",
     "href": "projects.html#neuropil-correction",
     "title": "Projects",
     "section": "Neuropil correction",
-    "text": "Neuropil correction"
+    "text": "Neuropil correction\nData processing and correction for neuropil contamination in two-photon calcium imaging data.\n\nStack: Python\nLinks: (add repo / documentation link)"
   },
   {
-    "objectID": "projects.html#quantification-of-visual-responsiveness",
-    "href": "projects.html#quantification-of-visual-responsiveness",
+    "objectID": "projects.html#benchmarking-visual-responsiveness-quantification-methods",
+    "href": "projects.html#benchmarking-visual-responsiveness-quantification-methods",
     "title": "Projects",
-    "section": "Quantification of visual responsiveness",
-    "text": "Quantification of visual responsiveness"
+    "section": "Benchmarking visual responsiveness quantification methods",
+    "text": "Benchmarking visual responsiveness quantification methods"
   },
   {
     "objectID": "projects.html#gcamp8-transgenic-mouse-line-validation-characterization",
@@ -123,7 +123,7 @@
     "href": "posts/2026-07-paired-plane-decrosstalk/index.html#s3",
     "title": "Cleaning up optical crosstalk between simultaneously imaged planes in a two-photon mesoscope",
     "section": "3. The correction",
-    "text": "3. The correction\n\nThe model\nFor a plane A imaged against its partner B, the observed images are a linear mix of the true (crosstalk-free) images:\n\\[\n\\begin{bmatrix} \\text{imaged}_A \\\\ \\text{imaged}_B \\end{bmatrix}\n=\n\\begin{bmatrix} 1-\\alpha & \\beta \\\\ \\alpha & 1-\\beta \\end{bmatrix}\n\\begin{bmatrix} \\text{true}_A \\\\ \\text{true}_B \\end{bmatrix}\n\\]\nso α is the fraction of A’s own signal that leaks out into B, and β is the fraction of B that leaks in and contaminates A. Undoing the crosstalk is just inverting this 2×2 mixing matrix. The whole problem is estimating (α, β).\nNote this is a relative crosstalk between two planes of different brightness — so the brightness imbalance between the planes matters, and α and β are generally not equal.\nAlso note that this shares a fundamental principle with ICA; how the two differ in practice is discussed below.\n\n\nEstimating (α, β)\n\nWork on registered mean images. Each plane is motion-corrected, and the paired plane’s raw movie is registered using the same correction (“registered-to-pair”). This solves the problem of differential motion in XY.\nBright-ROI bounding boxes. Rather than the full frame, the estimator works inside bounding boxes around the brightest ROIs of both planes (Figure 6, left). This avoids the shared low-frequency background — the key to not over-subtracting shared anatomy.\nGrid search minimizing mutual information. For each candidate (α, β) on a grid, the estimator unmixes the pair and computes the mutual information (MI) between the two reconstructed images, averaged over the ROI boxes. The chosen (α, β) is the one that minimizes MI — the point at which the two planes carry the least information about each other (Figure 6, right). Using MI rather than correlation matters: correlation falls monotonically as you subtract more, which would reward ever-larger coefficients; MI has a genuine minimum at the right amount.\nAveraging for stability. Coefficients are averaged across imaging epochs and across the two directions of a pair (the leak A→B estimated for plane A should equal the leak into B estimated for plane B — see §6), then stored per plane.\n\n\n\n\nFigure 5. The full protocol. Each plane of a pair (signal p1, paired p2) is motion-corrected; each plane’s registration transform is then applied to both planes — its own registered movie and the partner registered-to-pair (the paired plane re-registered with that transform). In each frame the mixing coefficients are estimated by minimizing MI between the two planes; the two estimates (from p1’s and p2’s registration) are averaged, and the inverse mixing matrix is applied to yield the decrosstalked movie for each plane. FOVs at left: dual-beam mean images (old-laser ground truth).\n\n\n\n\n\nFigure 6. Left: a registered mean FOV plane with the bright-ROI bounding boxes the estimator uses. Right: the normalized-MI landscape over (α, β) for that pair (80 MHz laser ground-truth). The grid search minimum (✚) lands right next to the single-beam ground-truth leak fractions (★) — the objective points at the correct answer."
+    "text": "3. The correction\n\nThe model\nFor a plane A imaged against its partner B, the observed images are a linear mix of the true (crosstalk-free) images:\n\\[\n\\begin{bmatrix} \\text{imaged}_A \\\\ \\text{imaged}_B \\end{bmatrix}\n=\n\\begin{bmatrix} 1-\\alpha & \\beta \\\\ \\alpha & 1-\\beta \\end{bmatrix}\n\\begin{bmatrix} \\text{true}_A \\\\ \\text{true}_B \\end{bmatrix}\n\\]\nso α is the fraction of A’s own signal that leaks out into B, and β is the fraction of B that leaks in and contaminates A. Undoing the crosstalk is just inverting this 2×2 mixing matrix. The whole problem is estimating (α, β).\nNote this is a relative crosstalk between two planes of different brightness — so the brightness imbalance between the planes matters, and α and β are generally not equal.\nAlso note that this shares a fundamental principle with ICA; how the two differ in practice is discussed below.\nLastly, applying the inverse mixing matrix not only removes crosstalk signal but also restores the plane’s own signal that was subtracted out by the crosstalk. The correction is therefore a reconstruction of the plane’s own signal, not just a subtraction of the paired plane’s ghost (Figure 7B).\n\n\nEstimating (α, β)\n\nWork on registered mean images. Each plane is motion-corrected, and the paired plane’s raw movie is registered using the same correction (“registered-to-pair”). This solves the problem of differential motion in XY.\nBright-ROI bounding boxes. Rather than the full frame, the estimator works inside bounding boxes around the brightest ROIs of both planes (Figure 6, left). This avoids the shared low-frequency background — the key to not over-subtracting shared anatomy.\nGrid search minimizing mutual information. For each candidate (α, β) on a grid, the estimator unmixes the pair and computes the mutual information (MI) between the two reconstructed images, averaged over the ROI boxes. The chosen (α, β) is the one that minimizes MI — the point at which the two planes carry the least information about each other (Figure 6, right). Using MI rather than correlation matters: correlation falls monotonically as you subtract more, which would reward ever-larger coefficients; MI has a genuine minimum at the right amount.\nAveraging for stability. Coefficients are averaged across imaging epochs and across the two directions of a pair (the leak A→B estimated for plane A should equal the leak into B estimated for plane B — see §6), then stored per plane.\n\n\n\n\nFigure 5. The full protocol. Each plane of a pair (signal p1, paired p2) is motion-corrected; each plane’s registration transform is then applied to both planes — its own registered movie and the partner registered-to-pair (the paired plane re-registered with that transform). In each frame the mixing coefficients are estimated by minimizing MI between the two planes; the two estimates (from p1’s and p2’s registration) are averaged, and the inverse mixing matrix is applied to yield the decrosstalked movie for each plane. FOVs at left: dual-beam mean images (old-laser ground truth).\n\n\n\n\n\nFigure 6. Left: a registered mean FOV plane with the bright-ROI bounding boxes the estimator uses. Right: the normalized-MI landscape over (α, β) for that pair (80 MHz laser ground-truth). The grid search minimum (✚) lands right next to the single-beam ground-truth leak fractions (★) — the objective points at the correct answer."
   },
   {
     "objectID": "posts/2026-07-paired-plane-decrosstalk/index.html#s4",
