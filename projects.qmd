@@ -4,12 +4,44 @@ page-layout: article
 title-block-banner: false
 ---
 
+<style>
+/* Projects page: make category sections and project entries visually distinct */
+section.level1 > h1 {
+  color: var(--bs-primary);
+  border-bottom: 2px solid var(--bs-primary);
+  padding-bottom: .3rem;
+  margin-top: 2.8rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+section.level1:first-of-type > h1 { margin-top: 1.2rem; }
+
+section.level2 {
+  border: 1px solid #e7e9ee;
+  border-left: 4px solid var(--bs-primary);
+  border-radius: 8px;
+  padding: .85rem 1.15rem;
+  margin: 1rem 0;
+  background: #fbfcfd;
+  transition: box-shadow .15s ease;
+}
+section.level2:hover { box-shadow: 0 3px 14px rgba(0,0,0,.08); }
+section.level2 > h2 {
+  margin-top: .15rem;
+  margin-bottom: .45rem;
+  font-size: 1.13rem;
+  border-bottom: none;
+}
+section.level2 p { margin-bottom: .45rem; }
+section.level2 ul { margin-bottom: .15rem; }
+</style>
+
 A running list of shipped artifacts. Each entry links to code and, where possible, a short writeup or demo.
 
 # Image processing
 ## Automated multimodal co-registration
 Automated co-registration pipeline for _in vivo_ two-photon z-stacks ↔ _ex vivo_ light-sheet 3D volumes / Xenium 2D spatial transcriptomics slices, with a Qt5 QC application. <br>
-- **Stack:** Python, 3D image registration, Qt5, Claude Code <br
+- **Stack:** Python, 3D image registration, Qt5, Claude Code <br>
 - **Links:** *(add repo / documentation link)*
 
 ## Crosstalk correction in beam-splitting two-photon microscopy
@@ -31,6 +63,13 @@ Quantification of single cell-level z-drift in two-photon calcium imaging data. 
 - **Links:** *(add repo / documentation link)*
 
 
+# Image acquisition
+## Online motion correction
+Implementing online motion correction for beam-splitting two-photon imaging, based on the observation of brain swelling during hydration. <br>
+- **Stack:** MATLAB, Python, image registration <br>
+- **Links:** *(add repo / documentation link)*
+
+
 # Spatial transcriptomics
 ## Gene panel selection package for 3D spatial transcriptomics
 Python package *mfishtoolspy* for gene panel selection in 3D spatial transcriptomics - a translation and extension of the R package (mFISHtools) into Python. <br>
@@ -42,11 +81,17 @@ LightGBM-based classifier on engineered intensity, morphology, shape, and contex
 - **Stack:** Python, LightGBM, MLflow, CellPose-SAM, feature engineering, human-in-the-loop retraining <br>
 - **Links:** *(add repo / documentation link)*
 
-# Image acquisition
-## Online motion correction
-Implementing online motion correction for beam-splitting two-photon imaging, based on the observation of brain swelling during hydration. <br>
-- **Stack:** MATLAB, Python, image registration <br>
+# Behavior monitoring
+## Automated pupil tracking 
+Automated pupil tracking pipeline for two-photon imaging experiments.
+- **Stack:** DeepLabCut, LightningPose <br>
 - **Links:** *(add repo / documentation link)*
+
+## Automated whisker-object touch detection in 3D (USC)
+Object touch detection algorithm using 3D behavior monitoring data with occlusion handling. <br>
+- **Stack:** MATLAB, 3D behavior monitoring <br>
+- **Links:** *(add repo / documentation link)*
+
 
 # Neuroscientific data analysis
 ## Benchmarking visual responsiveness quantification methods
