@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Jinho Kim">
+<meta name="dcterms.date" content="2026-08-01">
+<meta name="description" content="Detecting and correcting optical crosstalk between simultaneously imaged planes in a beam-splitting two-photon mesoscope — mutual-information estimation, single-beam ground-truth validation, and QC.">
+
+<title>Cleaning up optical crosstalk between simultaneously imaged planes in a two-photon mesoscope – Jinho Kim</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-b9268bc799fbaeaa4ad04495d18e55d3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Jinho Kim</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../projects.html"> 
+<span class="menu-text">Projects</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../blog.html"> 
+<span class="menu-text">Blog</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/"> <i class="bi bi-linkedin" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#s1" id="toc-s1" class="nav-link active" data-scroll-target="#s1">1. What is paired-plane crosstalk?</a></li>
+  <li><a href="#s2" id="toc-s2" class="nav-link" data-scroll-target="#s2">2. Why the obvious fixes don’t work</a></li>
+  <li><a href="#s3" id="toc-s3" class="nav-link" data-scroll-target="#s3">3. The correction</a>
+  <ul class="collapse">
+  <li><a href="#the-model" id="toc-the-model" class="nav-link" data-scroll-target="#the-model">The model</a></li>
+  <li><a href="#estimating-α-β" id="toc-estimating-α-β" class="nav-link" data-scroll-target="#estimating-α-β">Estimating (α, β)</a></li>
+  </ul></li>
+  <li><a href="#s4" id="toc-s4" class="nav-link" data-scroll-target="#s4">4. Does it work?</a>
+  <ul class="collapse">
+  <li><a href="#how-the-ground-truth-data-were-collected" id="toc-how-the-ground-truth-data-were-collected" class="nav-link" data-scroll-target="#how-the-ground-truth-data-were-collected">How the ground-truth data were collected</a></li>
+  <li><a href="#seeing-the-correction" id="toc-seeing-the-correction" class="nav-link" data-scroll-target="#seeing-the-correction">Seeing the correction</a></li>
+  </ul></li>
+  <li><a href="#s5" id="toc-s5" class="nav-link" data-scroll-target="#s5">5. How accurate is it? Ground truth, simulation, and a bake-off</a></li>
+  <li><a href="#s6" id="toc-s6" class="nav-link" data-scroll-target="#s6">6. Quality control</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
+  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Cleaning up optical crosstalk between simultaneously imaged planes in a two-photon mesoscope</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">two-photon imaging</div>
+    <div class="quarto-category">decrosstalk</div>
+    <div class="quarto-category">methods</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    Detecting and correcting optical crosstalk between simultaneously imaged planes in a beam-splitting two-photon mesoscope — mutual-information estimation, single-beam ground-truth validation, and QC.
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Jinho Kim </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">August 1, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><strong>Contributors</strong></p>
+<ul>
+<li><strong>Natalia Orlova</strong> — Microscope setup; initial decrosstalk algorithm (trace-based unmixing).</li>
+<li><strong>Sam Seid</strong> — Ground-truth data collection.</li>
+<li><strong>Arielle Leon &amp; Sean McCulloch</strong> — Integration of the algorithm into the pipeline.</li>
+<li><strong>Johannes Friedrich</strong> — Discussion of the algorithm; suite3d implementation and testing.</li>
+<li><strong>Jerome Lecoq</strong> — Discussion of the algorithm.</li>
+</ul>
+<p>Two-photon mesoscopes let us record from a lot of neurons at once, in the Allen Brain Observatory and many other projects across the Institute. One trick for recording even more neurons is to split the laser and image <strong>two depths at the same time</strong>. It comes with a subtle problem: the two planes bleed into each other.</p>
+<p>A faint copy of one plane shows up as “ghost” cells in the other. Left uncorrected, those ghosts look like real neurons. Just as important, the bleed-through <strong>contaminates the activity traces (ΔF/F) extracted from genuine ROIs</strong>, degrading real cells — not only adding spurious ones.</p>
+<p>This post walks through the problem and the correction we run in production: what the crosstalk is and where it comes from, why the obvious fixes don’t work, how our estimator works, and how well it does — measured against real ground-truth recordings, against simulations, and against two off-the-shelf alternatives (naive ICA and suite3d). I’ll also cover the quality-control tooling we built to catch the rare failures.</p>
+<hr>
+<section id="s1" class="level2">
+<h2 class="anchored" data-anchor-id="s1">1. What is paired-plane crosstalk?</h2>
+<p>To image more neurons per session, a two-photon mesoscope can be upgraded to capture <strong>two depths at once</strong>. The excitation laser is <strong>split into two beams</strong>, one is given a small time delay, and the two are focused at <strong>two different depths</strong>. We refer to this beam-splitting configuration internally as the <strong>multiscope</strong> <span class="citation" data-cites="tsyboulski2018"><a href="#ref-tsyboulski2018" role="doc-biblioref">[1]</a></span>.</p>
+<p>The multiscope is one of a broader family of temporally-multiplexed two-photon systems — spatiotemporal multiplexing <span class="citation" data-cites="cheng2011"><a href="#ref-cheng2011" role="doc-biblioref">[2]</a></span>, reverberation microscopy <span class="citation" data-cites="beaulieu2020"><a href="#ref-beaulieu2020" role="doc-biblioref">[3]</a></span>, and light-beads microscopy <span class="citation" data-cites="demas2021"><a href="#ref-demas2021" role="doc-biblioref">[4]</a></span> — that excite multiple planes and separate them by photon arrival time, and all face the same crosstalk (cf.&nbsp;the Diesel2p mesoscope <span class="citation" data-cites="yu2021"><a href="#ref-yu2021" role="doc-biblioref">[5]</a></span>, which uses a separate resonance scanner per beam and so has no comparably structured crosstalk).</p>
+<p>Both depths are excited within a single inter-pulse interval (~16 ns at a 62.5 MHz repetition rate), and the fluorescence from each is separated by a <strong>time-gated collection window</strong> — one gate per plane.</p>
+<p>The catch is fluorescence lifetime. A GCaMP molecule keeps emitting for a few nanoseconds after it is excited (the fluorescence lifetime of GFP-based indicators is <strong>≈2.6 ns</strong> <span class="citation" data-cites="simonyan2024"><a href="#ref-simonyan2024" role="doc-biblioref">[6]</a></span>), so the <strong>tail</strong> of one plane’s fluorescence spills into the <em>other</em> plane’s collection gate. Those stray photons get counted as the wrong plane’s signal. That is the crosstalk (<a href="#figure-1">Figure 1</a>).</p>
+<div id="figure-1" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="figures/fig1a_mechanism_schematic.png" class="img-fluid figure-img"></p>
+<figcaption><strong>Figure 1.</strong> <em>Left:</em> one pulse train is split into two beams, offset in time and focused at two depths (the two planes of a “pair”). <em>Right:</em> each pulse’s fluorescence decays over a few ns (τ ≈ 2.6 ns); the tail of one plane is still emitting when the <em>other</em> plane’s collection gate opens, so it is collected as the wrong plane’s signal — bleed-through set by <strong>timing and fluorophore lifetime</strong>, i.e.&nbsp;the instrument configuration, not the biology.</figcaption>
+</figure>
+</div>
+<p>Because it is optical/temporal, the amount of crosstalk is a property of the acquisition, not of any particular neuron. In a well-tuned and balanced session it is only a few percent — invisible at native contrast, but enough to plant visible ghosts. The clean way to <em>see</em> it is a <strong>single-beam recording</strong>: image a plane with its own beam only (“clean”), then with both beams on (“crosstalk”). The extra ghost cells that appear in the dual-beam image are the bleed-through (<a href="#figure-2">Figure 2</a>).</p>
+<div id="figure-2" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="figures/fig1_clean_vs_crosstalk.gif" class="img-fluid figure-img"></p>
+<figcaption><strong>Figure 2.</strong> One plane imaged single-beam (“clean”) vs dual-beam (“crosstalk”). The extra ghost cells that appear in “crosstalk” are the bleed-through from the paired plane. Ground-truth single-beam data from primary visual cortex of a <em>Slc32a1-Cre;TITL2-GCaMP8s</em> (pan-inhibitory) mouse; 100 µm scale bar.</figcaption>
+</figure>
+</div>
+<hr>
+</section>
+<section id="s2" class="level2">
+<h2 class="anchored" data-anchor-id="s2">2. Why the obvious fixes don’t work</h2>
+<p>If crosstalk is just “plane B leaking a fraction of its signal into plane A,” why not estimate that fraction directly — say, regress one plane’s pixel time series against the other’s and subtract? Two confounds get in the way.</p>
+<p><strong>The two planes share real biology.</strong> They sit at the same location, a little apart in depth, so they see much of the same <strong>vasculature shadows and neuropil background</strong>. That makes the two images genuinely correlated <em>even with zero crosstalk</em>. Any method that works by making the two planes independent — blind source separation (ICA <span class="citation" data-cites="hyvarinen2000"><a href="#ref-hyvarinen2000" role="doc-biblioref">[7]</a></span>), or simply minimizing their correlation — is misled by this shared anatomy: minimizing correlation never bottoms out at the right amount and keeps <strong>over-subtracting</strong>, while ICA’s assumption that the planes are independent is false for genuinely correlated planes, so its coefficient comes out <strong>biased — by an amount, and even a direction, that changes with the data</strong> (<a href="#s5">§5</a>).</p>
+<p><strong>The two planes don’t move together.</strong> You might hope to line the planes up once and just subtract — but a pair does not move as a rigid unit. Each plane is motion-corrected independently, and when we compare the per-frame rigid shifts across <strong>69 hour-long sessions</strong>, the two planes of a pair follow visibly <em>different</em> XY trajectories — increasingly so the farther apart in depth they sit (<a href="#figure-3">Figure 3</a>).</p>
+<div id="figure-3" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="figures/fig2_motion_divergence.png" class="img-fluid figure-img"></p>
+<figcaption><strong>Figure 3.</strong> Paired planes move differently in XY. (a, b) x- and y-shift over one 60-min session for the closest pair (160 &amp; 200 µm, blue) and the furthest-apart pair (40 &amp; 320 µm, red); within a pair, darker = upper plane / lighter = lower. (c) Across all 69 sessions (276 pairs), inter-plane motion divergence over the hour grows with within-pair depth separation (r = 0.45); the exemplar pair is circled.</figcaption>
+</figure>
+</div>
+<p>You can see the consequence directly. Because the planes slide relative to each other, the bleed-through is <strong>not pinned to a fixed spot</strong>: as you step through a session’s epochs, the ghost cells (a copy of the paired plane) visibly <em>drift</em> across the field of view while the plane’s own cells stay put (<a href="#figure-4">Figure 4</a>).</p>
+<div id="figure-4" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="figures/fig2_moving_ghost_raw.gif" class="img-fluid figure-img"></p>
+<figcaption><strong>Figure 4.</strong> Raw episodic mean FOV of a deep plane stepping through epochs (left), beside the paired plane that is its crosstalk source (right). The faint ghost cells in the raw plane track the bright cells in the paired plane and shift position from epoch to epoch — because the two planes move differently.</figcaption>
+</figure>
+</div>
+<p>Those facts — shared anatomy and a moving, differential offset between planes — are why the correction is built the way it is: work on <strong>motion-corrected episodic mean images</strong> (instead of signal time series), restrict attention to <strong>bright ROIs</strong> (to avoid vasculature), and minimize <strong>mutual information</strong> rather than plain correlation (to account for the shared structure).</p>
+<hr>
+</section>
+<section id="s3" class="level2">
+<h2 class="anchored" data-anchor-id="s3">3. The correction</h2>
+<section id="the-model" class="level3">
+<h3 class="anchored" data-anchor-id="the-model">The model</h3>
+<p>For a plane <strong>A</strong> imaged against its partner <strong>B</strong>, the observed images are a linear mix of the true (crosstalk-free) images:</p>
+<pre><code>imaged_A = (1 − α)·true_A + β·true_B
+imaged_B =      α·true_A + (1 − β)·true_B</code></pre>
+<p>so <strong>α</strong> is the fraction of A’s own signal that leaks <em>out</em> into B, and <strong>β</strong> is the fraction of B that leaks <em>in</em> and contaminates A. Undoing the crosstalk is just inverting this 2×2 mixing matrix. The whole problem is estimating <strong>(α, β)</strong>.</p>
+<p>Note this is a <em>relative</em> crosstalk between two planes of different brightness — so the brightness imbalance between the planes matters, and α and β are generally not equal.</p>
+<p>Also note that this shares a fundamental principle with ICA; how the two differ in practice is discussed below.</p>
+</section>
+<section id="estimating-α-β" class="level3">
+<h3 class="anchored" data-anchor-id="estimating-α-β">Estimating (α, β)</h3>
+<ol type="1">
+<li><strong>Work on registered mean images.</strong> Each plane is motion-corrected, and the paired plane’s raw movie is registered using the same correction (“registered-to-pair”). This solves the problem of differential motion in XY.</li>
+<li><strong>Bright-ROI bounding boxes.</strong> Rather than the full frame, the estimator works inside bounding boxes around the brightest ROIs of both planes (<a href="#figure-6">Figure 6</a>, left). This avoids the shared low-frequency background — the key to not over-subtracting shared anatomy.</li>
+<li><strong>Grid search minimizing mutual information.</strong> For each candidate (α, β) on a grid, the estimator unmixes the pair and computes the <strong>mutual information (MI)</strong> between the two reconstructed images, averaged over the ROI boxes. The chosen (α, β) is the one that <strong>minimizes</strong> MI — the point at which the two planes carry the least information about each other (<a href="#figure-6">Figure 6</a>, right). Using MI rather than correlation matters: correlation falls monotonically as you subtract more, which would reward ever-larger coefficients; MI has a genuine minimum at the right amount.</li>
+<li><strong>Averaging for stability.</strong> Coefficients are averaged across imaging <strong>epochs</strong> and across the two directions of a <strong>pair</strong> (the leak A→B estimated for plane A should equal the leak into B estimated for plane B — see <a href="#s6">§6</a>), then stored per plane.</li>
+</ol>
+<div id="figure-5" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="figures/fig_protocol.png" class="img-fluid figure-img"></p>
+<figcaption><strong>Figure 5.</strong> The full protocol. Each plane of a pair (signal <em>p1</em>, paired <em>p2</em>) is motion-corrected; each plane’s registration transform is then applied to <em>both</em> planes — its own <strong>registered movie</strong> and the partner <strong>registered-to-pair</strong> (the paired plane re-registered with that transform). In each frame the mixing coefficients are estimated by minimizing MI between the two planes; the two estimates (from <em>p1</em>’s and <em>p2</em>’s registration) are <strong>averaged</strong>, and the inverse mixing matrix is applied to yield the decrosstalked movie for each plane. FOVs at left: dual-beam mean images (old-laser ground truth).</figcaption>
+</figure>
+</div>
+<div id="figure-6" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="figures/fig3b_method_roi_landscape.png" class="img-fluid figure-img"></p>
+<figcaption><strong>Figure 6.</strong> <em>Left:</em> a registered mean FOV plane with the bright-ROI bounding boxes the estimator uses. <em>Right:</em> the normalized-MI landscape over (α, β) for that pair (80 MHz laser ground-truth). The grid search minimum (✚) lands right next to the single-beam ground-truth leak fractions (★) — the objective points at the correct answer.</figcaption>
+</figure>
+</div>
+<hr>
+</section>
+</section>
+<section id="s4" class="level2">
+<h2 class="anchored" data-anchor-id="s4">4. Does it work?</h2>
+<section id="how-the-ground-truth-data-were-collected" class="level3">
+<h3 class="anchored" data-anchor-id="how-the-ground-truth-data-were-collected">How the ground-truth data were collected</h3>
+<p>To know the true crosstalk we need a recording where one plane’s contribution to the other is <em>known</em>. We get that by <strong>blocking one of the two beams</strong>: with a beam blocked, its plane is never excited, so whatever appears in that plane’s detector channel is <em>pure crosstalk</em> leaking from the open plane — a dim, scaled replica of the open plane’s image, acquired <em>simultaneously</em> and therefore perfectly co-registered and activity-matched. Regressing the blocked channel onto the open one gives the leak fraction directly, with no estimation and no confound from shared anatomy or motion. Blocking each beam in turn measures both directions of the 2×2 mixing matrix (<a href="#figure-7">Figure 7</a>).</p>
+<div id="figure-7" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="figures/figS_gt_matrix.png" class="img-fluid figure-img"></p>
+<figcaption><strong>Figure 7. How the ground-truth mixing matrix is measured.</strong> <em>(A)</em> Block one beam: the un-excited plane’s channel then contains only crosstalk from the open plane — a scaled replica acquired <em>simultaneously</em>. Columns are the two detector channels (ch1 middle, ch2 right); each row blocks one beam, so the signal (open channel) and crosstalk (blocked channel) swap sides. The crosstalk’s intensity range is ~14× smaller, and that ratio is the coefficient (crosstalk ≈ coefficient × signal). α = 0.070 (ch1 → ch2; top row, beam 2 blocked); β = 0.078 (ch2 → ch1; bottom row, beam 1 blocked). <em>(B)</em> Applying the inverse of the mixing matrix built from these ground-truth coefficients to the observed (both-beam) image removes the crosstalk. Observed (left), decrosstalked (middle), and their difference (right; red = crosstalk removed, blue = the plane’s own signal restored by the unmixing). Scale bars 100 µm.</figcaption>
+</figure>
+</div>
+</section>
+<section id="seeing-the-correction" class="level3">
+<h3 class="anchored" data-anchor-id="seeing-the-correction">Seeing the correction</h3>
+<p>On the ground-truth data we can walk a plane through all three states — imaged single-beam (“clean”, the truth), both-beam (“observed”, with crosstalk), and after correction (“decrosstalked”) — for both planes at once (<a href="#figure-8">Figure 8</a>). The correction nudges the observed image back toward the clean one; on the high-SNR session mean the change is deliberately subtle (only a few percent of the signal is crosstalk), which is exactly why quality control is hard (<a href="#s6">§6</a>).</p>
+<div id="figure-8" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="figures/fig4_states_cycle.gif" class="img-fluid figure-img"></p>
+<figcaption><strong>Figure 8.</strong> Both planes cycling slowly through single-beam (clean), dual-beam (observed), and decrosstalked. γ-stretched; 100 µm scale bar. Ground-truth data.</figcaption>
+</figure>
+</div>
+<p>The crosstalk is far more striking on a <em>real</em> session when you step through its epochs. Because the two planes move differently (<a href="#s2">§2</a>), the ghost is not static — it <strong>drifts across the field of view over the session</strong>. In the raw episodic mean movie below (middle), watch the soft ghost cells in the upper field move in lockstep with the paired plane (right); after decrosstalk (left) they are largely gone while the plane’s own cells stay put.</p>
+<div id="figure-9" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="figures/fig4_emf_moving_ghost.gif" class="img-fluid figure-img"></p>
+<figcaption><strong>Figure 9.</strong> Episodic-mean FOV stepping through epochs: decrosstalked (left) and raw (middle) — raw placed next to the paired plane (right, the crosstalk source, re-registered with this plane’s registration transform). A real 60-min session, the furthest-apart pair (planes 6–7; depths 304 µm and 37 µm, top-right), β ≈ 0.08. Raw and decrosstalked share one contrast window; the paired plane has its own. The moving ghost cells that track the paired plane are removed by the correction.</figcaption>
+</figure>
+</div>
+<p><strong>It also works in dense GCaMP8 samples.</strong> Everything above is sparse pan-inhibitory data. In <em>pan-neuronal</em> soma-targeting recordings (SNAP25-Cre;TITL2-RiboL1-GCaMP8s), far more cells are labeled. The dense paired plane casts a correspondingly dense ghost into its partner, and — because the planes move differently — that ghost drifts across epochs; the same estimator removes it (<a href="#figure-10">Figure 10</a>).</p>
+<div id="figure-10" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="figures/fig4c_dense_example.gif" class="img-fluid figure-img"></p>
+<figcaption><strong>Figure 10.</strong> A dense pan-neuronal plane (SNAP25-Cre;TITL2-RiboL1-GCaMP8s) stepping through epochs: decrosstalked (left), raw (middle), and the paired plane that is the crosstalk source (right; depths 79 µm and 283 µm, top-right). Raw and decrosstalked share one contrast window; the paired plane has its own. The moving bleed-through from the dense paired plane is removed by the correction. 100 µm scale bar.</figcaption>
+</figure>
+</div>
+<p>The removed structure is exactly the paired plane’s cells — the crosstalk — and nothing else. But “looks clean” is not a measurement. For that we need ground truth.</p>
+<hr>
+</section>
+</section>
+<section id="s5" class="level2">
+<h2 class="anchored" data-anchor-id="s5">5. How accurate is it? Ground truth, simulation, and a bake-off</h2>
+<p>The single-beam ground-truth recordings give us the true leak fractions directly (regress the blocked channel on the open channel within ROIs): <strong>0.070 / 0.078</strong> for the 80 MHz laser and <strong>0.029 / 0.027</strong> for the 62.5 MHz laser. That lets us score any estimator by how close its (α, β) come to the truth, and by how much signal↔︎paired dependence is <em>left</em> after unmixing. We compared three estimators:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>estimator</th>
+<th>idea</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>production</strong></td>
+<td>minimize normalized MI over bright-ROI boxes</td>
+</tr>
+<tr class="even">
+<td><strong>naive ICA</strong></td>
+<td><code>FastICA</code> blind source separation</td>
+</tr>
+<tr class="odd">
+<td><strong>suite3d</strong></td>
+<td>correlation-inflection estimator <span class="citation" data-cites="haydaroglu2025"><a href="#ref-haydaroglu2025" role="doc-biblioref">[8]</a></span> (<a href="https://github.com/alihaydaroglu/suite3d/">code</a>)</td>
+</tr>
+</tbody>
+</table>
+<p>For a fair comparison, all three estimators were run on the <strong>exact same</strong> bright-ROI boxes, so the test isolates the estimator itself.</p>
+<p><strong>On the real ground-truth data</strong>, production essentially nails it. Its (α, β) sit right on the ground-truth values (<a href="#figure-11">Figure 11</a>), its mean coefficient error is <strong>0.007</strong>, and it drives the residual signal↔︎paired correlation from the raw ceiling (<strong>0.465</strong>) down to <strong>0.189</strong> — i.e.&nbsp;to the shared-anatomy floor (<strong>0.186</strong>). It removes essentially all the <em>removable</em> crosstalk.</p>
+<div id="figure-11" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="figures/fig5a_alphabeta_vs_gt.png" class="img-fluid figure-img"></p>
+<figcaption><strong>Figure 11.</strong> Estimated (α, β) vs the single-beam ground truth (★). Production (●) overlaps the truth for both lasers; naive ICA is close on the 80 MHz laser but drifts on the low-crosstalk 62.5 MHz laser; suite3d under-shoots to ~0.01.</figcaption>
+</figure>
+</div>
+<p><strong>On simulations</strong> — impose a known (α, β) on the clean images (a full 2-D grid, not just the α = β diagonal) and try to recover it — the same picture holds across the whole plane (<a href="#figure-12">Figure 12</a>). Production’s estimates land right on the true grid points; naive ICA is systematically biased — over-estimating on the 80 MHz laser and under-estimating on the low-crosstalk 62.5 MHz laser; and suite3d collapses to ≈0.01 regardless of the true value, ignoring the signal almost entirely.</p>
+<div id="figure-12" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="figures/fig_coef_grid.png" class="img-fluid figure-img"></p>
+<figcaption><strong>Figure 12.</strong> (a, b) Recovered vs true (α, β) across the 2-D simulation grid, one panel per laser: each line runs from a true grid point (✚) to a method’s estimate. Production (blue) sits on the grid; naive ICA (orange) is biased (over on the 80 MHz laser, under on 62.5 MHz); suite3d (green) fans to ≈0.01. (c) Mean absolute coefficient error per method and laser (± std over the grid, log axis): production ≈ 0.002–0.004, naive ICA ≈ 0.010–0.029, suite3d ≈ 0.11–0.12.</figcaption>
+</figure>
+</div>
+<p><strong>Takeaway from the bake-off.</strong> All three methods were fit on identical bright-ROI patches, so the comparison isolates the estimator. The ranking is <strong>production &gt; naive ICA &gt; suite3d</strong>, and production is the only method that reliably reaches the shared-anatomy floor. suite3d’s correlation-inflection point <span class="citation" data-cites="haydaroglu2025"><a href="#ref-haydaroglu2025" role="doc-biblioref">[8]</a></span> was likely intended to separate genuine shared correlation from crosstalk — i.e., to cope with the shared anatomy — but it consistently under-corrected. When tested on the real data at the full frame, it corrected somewhat but still under-corrected in most cases.</p>
+<hr>
+</section>
+<section id="s6" class="level2">
+<h2 class="anchored" data-anchor-id="s6">6. Quality control</h2>
+<p>Across a large pan-inhibitory dataset, most planes are corrected well — but a few are not, and the failures are easy to miss. We built two QC tools.</p>
+<p><strong>An interactive visual-QC app</strong> (<a href="#figure-13">Figure 13</a>) lets a labeler flip PRE↔︎POST and toggle the paired (crosstalk-source) view at matched contrast, scrub epochs, and label each plane <code>good</code> / <code>under-corrected</code> / <code>over-corrected</code> / <code>unsure</code>. These human labels are the ground truth the automatic metrics are validated against.</p>
+<div id="figure-13" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="figures/fig6b_qc_app.png" class="img-fluid figure-img"></p>
+<figcaption><strong>Figure 13.</strong> The Qt desktop QC app: control panel (session/pair/epoch navigation, α/β readout, per-plane label buttons) and two plane panes. Space flips PRE↔︎POST; <code>p</code> toggles the paired view.</figcaption>
+</figure>
+</div>
+<p><strong>Automatic QC checks</strong> exploit two structural facts about a <em>correct</em> estimate (<a href="#figure-14">Figure 14</a>):</p>
+<ul>
+<li><strong>The MI landscape is stable across epochs and has one well-located minimum.</strong> If the per-epoch landscapes wander or the minimum is multi-modal, the estimate is untrustworthy. In practice the minimum barely moves (σ ≈ 0.005–0.02).</li>
+<li><strong>Reciprocity.</strong> A physical leak between planes p and q is estimated <em>twice</em>: the leak p→q appears as α of plane p and as β of plane q. For a sound estimate these agree (α_p ≈ β_q); a large reciprocity gap flags a one-plane segmentation or registration breakdown that per-plane views miss. Median gap ≈ 0.01.</li>
+</ul>
+<div id="figure-14" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="figures/fig6_qc_page.png" class="img-fluid figure-img"></p>
+<figcaption><strong>Figure 14.</strong> The per-plane QC page: per-epoch MI landscapes (top), argmin stability and α/β-vs-epoch (middle), and pair reciprocity (bottom, α_p vs β_q with a 0.05 flag).</figcaption>
+</figure>
+</div>
+<p>One important lesson from QC: <strong>judge decrosstalk on individual epochs, not the session mean.</strong> Decrosstalk is a linear, per-frame operation, so the corrected session-mean is exactly the average of the corrected epochs — and the high-SNR mean can <em>camouflage</em> residual crosstalk that individual, lower-SNR epochs expose. A plane whose mean looks perfectly clean can still show per-epoch artifacts.</p>
+<hr>
+</section>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<p>Paired-plane crosstalk in a beam-splitting mesoscope is an optical/temporal artifact — a few-percent ghost of one depth plane bleeding into the other. Because the two planes share real anatomy and don’t move in lockstep, naive decorrelation over-subtracts. Estimating the mixing coefficients by <strong>minimizing mutual information inside bright ROIs</strong> on registered mean images sidesteps both confounds, and — validated against single-beam ground truth, simulations, and two alternative estimators — removes essentially all removable crosstalk, reaching the irreducible shared-anatomy floor and clearly beating naive ICA and suite3d. QC tooling catches the rare failures.</p>
+<hr>
+</section>
+<section id="resources" class="level2">
+<h2 class="anchored" data-anchor-id="resources">Resources</h2>
+<ul>
+<li>Production algorithm: <a href="https://github.com/AllenNeuralDynamics/aind-ophys-decrosstalk-roi-images"><code>aind-ophys-decrosstalk-roi-images</code></a></li>
+<li>Visual-QC app: <a href="https://github.com/jkim0731/multiscope-decrosstalk-qc-app"><code>multiscope-decrosstalk-qc-app</code></a></li>
+</ul>
+<hr>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list">
+<div id="ref-tsyboulski2018" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline">D. Tsyboulski, N. Orlova, F. Griffin, S. Seid, J. Lecoq, and P. Saggau, <span>“Remote focusing system for simultaneous dual-plane mesoscopic multiphoton imaging,”</span> <em>bioRxiv</em>, p. 503052, 2018, doi: <a href="https://doi.org/10.1101/503052">10.1101/503052</a>.</div>
+</div>
+<div id="ref-cheng2011" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[2] </div><div class="csl-right-inline">A. Cheng, J. T. Gonçalves, P. Golshani, K. Arisaka, and C. Portera-Cailliau, <span>“Simultaneous two-photon calcium imaging at different depths with spatiotemporal multiplexing,”</span> <em>Nature Methods</em>, vol. 8, pp. 139–142, 2011, doi: <a href="https://doi.org/10.1038/nmeth.1552">10.1038/nmeth.1552</a>.</div>
+</div>
+<div id="ref-beaulieu2020" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[3] </div><div class="csl-right-inline">D. R. Beaulieu, I. G. Davison, K. Kılıç, T. G. Bifano, and J. Mertz, <span>“Simultaneous multiplane imaging with reverberation two-photon microscopy,”</span> <em>Nature Methods</em>, vol. 17, pp. 283–286, 2020, doi: <a href="https://doi.org/10.1038/s41592-019-0728-9">10.1038/s41592-019-0728-9</a>.</div>
+</div>
+<div id="ref-demas2021" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[4] </div><div class="csl-right-inline">J. Demas <em>et al.</em>, <span>“High-speed, cortex-wide volumetric recording of neuroactivity at cellular resolution using light beads microscopy,”</span> <em>Nature Methods</em>, vol. 18, pp. 1103–1111, 2021, doi: <a href="https://doi.org/10.1038/s41592-021-01239-8">10.1038/s41592-021-01239-8</a>.</div>
+</div>
+<div id="ref-yu2021" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[5] </div><div class="csl-right-inline">C.-H. Yu, J. N. Stirman, Y. Yu, R. Hira, and S. L. Smith, <span>“Diesel2p mesoscope with dual independent scan engines for flexible capture of dynamics in distributed neural circuitry,”</span> <em>Nature Communications</em>, vol. 12, p. 6639, 2021, doi: <a href="https://doi.org/10.1038/s41467-021-26736-4">10.1038/s41467-021-26736-4</a>.</div>
+</div>
+<div id="ref-simonyan2024" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[6] </div><div class="csl-right-inline">T. R. Simonyan <em>et al.</em>, <span>“Calcium indicators with fluorescence lifetime-based signal readout: A structure–function study,”</span> <em>International Journal of Molecular Sciences</em>, vol. 25, p. 12493, 2024, doi: <a href="https://doi.org/10.3390/ijms252312493">10.3390/ijms252312493</a>.</div>
+</div>
+<div id="ref-hyvarinen2000" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[7] </div><div class="csl-right-inline">A. Hyvärinen and E. Oja, <span>“Independent component analysis: Algorithms and applications,”</span> <em>Neural Networks</em>, vol. 13, no. 4–5, pp. 411–430, 2000, doi: <a href="https://doi.org/10.1016/S0893-6080(00)00026-5">10.1016/S0893-6080(00)00026-5</a>.</div>
+</div>
+<div id="ref-haydaroglu2025" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[8] </div><div class="csl-right-inline">A. Haydaroğlu <em>et al.</em>, <span>“Suite3D: Volumetric cell detection for two-photon microscopy,”</span> <em>bioRxiv</em>, p. 2025.03.26.645628, 2025, doi: <a href="https://doi.org/10.1101/2025.03.26.645628">10.1101/2025.03.26.645628</a>.</div>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/jkim0731\.github\.io\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
