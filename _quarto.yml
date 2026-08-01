@@ -10,15 +10,21 @@ website:
         text: Home
       - href: projects.qmd
         text: Projects
-      - href: blog.qmd
-        text: Blog
       - href: about.qmd
         text: About
     right:
       - icon: github
-        href: https://github.com/
+        href: https://github.com/jkim0731/
+        aria-label: GitHub
       - icon: linkedin
-        href: https://www.linkedin.com/
+        href: https://www.linkedin.com/in/jinho-kim-548a447/
+        aria-label: LinkedIn
+      - icon: twitter-x
+        href: https://x.com/jkimkj
+        aria-label: X (Twitter)
+      - icon: mortarboard-fill
+        href: https://scholar.google.com/citations?user=IcxEW8YAAAAJ&hl=en
+        aria-label: Google Scholar
 
 format:
   html:
