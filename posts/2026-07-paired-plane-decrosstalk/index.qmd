@@ -117,10 +117,12 @@ minimize **mutual information** rather than plain correlation (to account for th
 For a plane **A** imaged against its partner **B**, the observed images are a linear mix of
 the true (crosstalk-free) images:
 
-```
-imaged_A = (1 − α)·true_A + β·true_B
-imaged_B =      α·true_A + (1 − β)·true_B
-```
+$$
+\begin{bmatrix} \text{imaged}_A \\ \text{imaged}_B \end{bmatrix}
+=
+\begin{bmatrix} 1-\alpha & \beta \\ \alpha & 1-\beta \end{bmatrix}
+\begin{bmatrix} \text{true}_A \\ \text{true}_B \end{bmatrix}
+$$
 
 so **α** is the fraction of A's own signal that leaks *out* into B, and **β** is the
 fraction of B that leaks *in* and contaminates A. Undoing the crosstalk is just inverting
