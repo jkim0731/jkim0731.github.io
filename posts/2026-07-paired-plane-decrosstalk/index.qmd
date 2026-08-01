@@ -133,6 +133,8 @@ brightness imbalance between the planes matters, and α and β are generally not
 
 Also note that this shares a fundamental principle with ICA; how the two differ in practice is discussed below.
 
+Lastly, applying the inverse mixing matrix not only removes crosstalk signal but also restores the plane's own signal that was subtracted out by the crosstalk. The correction is therefore a *reconstruction* of the plane's own signal, not just a subtraction of the paired plane's ghost ([Figure 7B](#figure-7)).
+
 ### Estimating (α, β)
 
 1. **Work on registered mean images.** Each plane is motion-corrected, and the paired plane's raw movie
