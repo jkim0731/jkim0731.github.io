@@ -1,6 +1,11 @@
 # Shared settings for all blog posts
 comments:
-  utterances:
+  giscus:
     repo: jkim0731/jkim0731.github.io
-    theme: github-light
-    issue-term: pathname
+    repo-id: R_kgDOTpjvRQ
+    category: Announcements
+    category-id: DIC_kwDOTpjvRc4DCfjq
+    mapping: pathname
+    reactions-enabled: true
+    input-position: bottom
+    theme: light
