@@ -18,7 +18,7 @@
     "href": "projects.html#automated-multimodal-co-registration",
     "title": "Projects",
     "section": "Automated multimodal co-registration",
-    "text": "Automated multimodal co-registration\nAutomated co-registration pipeline for in vivo two-photon z-stacks ↔︎ ex vivo light-sheet 3D volumes / Xenium 2D spatial transcriptomics slices, with a Qt5 QC application.  - Stack: Python, 3D image registration, Qt5, Claude Code  - Links: (add repo / documentation link)"
+    "text": "Automated multimodal co-registration\nAutomated co-registration pipeline for in vivo two-photon z-stacks ↔︎ ex vivo light-sheet 3D volumes / Xenium 2D spatial transcriptomics slices, with a Qt5 QC application.  - Links: (add repo / documentation link)"
   },
   {
     "objectID": "projects.html#crosstalk-correction-in-beam-splitting-two-photon-microscopy",
@@ -39,49 +39,49 @@
     "href": "projects.html#dff-calculation-for-two-photon-calcium-imaging-data",
     "title": "Projects",
     "section": "DFF calculation for two-photon calcium imaging data",
-    "text": "DFF calculation for two-photon calcium imaging data\nFluorescence baseline estimation using iterative reweighted least squares (IRLS) and noise level matching, with a Qt5 QC application.  - Stack: Python, time series, IRLS, Qt5  - Links: (add repo / documentation link)"
+    "text": "DFF calculation for two-photon calcium imaging data\nFluorescence baseline estimation using iterative reweighted least squares (IRLS) and noise level matching, with a Qt5 QC application.  - Links: (add repo / documentation link)"
   },
   {
     "objectID": "projects.html#single-cell-z-drift-qc-for-two-photon-calcium-imaging-data",
     "href": "projects.html#single-cell-z-drift-qc-for-two-photon-calcium-imaging-data",
     "title": "Projects",
     "section": "Single cell z-drift QC for two-photon calcium imaging data",
-    "text": "Single cell z-drift QC for two-photon calcium imaging data\nQuantification of single cell-level z-drift in two-photon calcium imaging data.  - Stack: Python, image registration  - Links: (add repo / documentation link)"
+    "text": "Single cell z-drift QC for two-photon calcium imaging data\nQuantification of single cell-level z-drift in two-photon calcium imaging data.  - Links: (add repo / documentation link)"
   },
   {
     "objectID": "projects.html#online-motion-correction",
     "href": "projects.html#online-motion-correction",
     "title": "Projects",
     "section": "Online motion correction",
-    "text": "Online motion correction\nImplementing online motion correction for beam-splitting two-photon imaging, based on the observation of brain swelling during hydration.  - Stack: MATLAB, Python, image registration  - Links: (add repo / documentation link)"
+    "text": "Online motion correction\nImplementing online motion correction for beam-splitting two-photon imaging, based on the observation of brain swelling during hydration.  - Links: (add repo / documentation link)"
   },
   {
     "objectID": "projects.html#gene-panel-selection-package-for-3d-spatial-transcriptomics",
     "href": "projects.html#gene-panel-selection-package-for-3d-spatial-transcriptomics",
     "title": "Projects",
     "section": "Gene panel selection package for 3D spatial transcriptomics",
-    "text": "Gene panel selection package for 3D spatial transcriptomics\nPython package mfishtoolspy for gene panel selection in 3D spatial transcriptomics - a translation and extension of the R package (mFISHtools) into Python.  - Stack: Python, R, scRNA, spatial transcriptomics, cursor AI  - Links: (add repo / documentation link)"
+    "text": "Gene panel selection package for 3D spatial transcriptomics\nPython package mfishtoolspy for gene panel selection in 3D spatial transcriptomics - a translation and extension of the R package (mFISHtools) into Python.  - Links: (add repo / documentation link)"
   },
   {
     "objectID": "projects.html#d-roi-quality-classifier",
     "href": "projects.html#d-roi-quality-classifier",
     "title": "Projects",
     "section": "3D ROI Quality Classifier",
-    "text": "3D ROI Quality Classifier\nLightGBM-based classifier on engineered intensity, morphology, shape, and context features, with a retraining architecture tracked in MLflow. (3D HCR ROI)  - Stack: Python, LightGBM, MLflow, CellPose-SAM, feature engineering, human-in-the-loop retraining  - Links: (add repo / documentation link)"
+    "text": "3D ROI Quality Classifier\nLightGBM-based classifier on engineered intensity, morphology, shape, and context features, with a retraining architecture tracked in MLflow. (3D HCR ROI)  - Links: (add repo / documentation link)"
   },
   {
     "objectID": "projects.html#automated-pupil-tracking",
     "href": "projects.html#automated-pupil-tracking",
     "title": "Projects",
     "section": "Automated pupil tracking",
-    "text": "Automated pupil tracking\nAutomated pupil tracking pipeline for two-photon imaging experiments. - Stack: DeepLabCut, LightningPose  - Links: (add repo / documentation link)"
+    "text": "Automated pupil tracking\nAutomated pupil tracking pipeline for two-photon imaging experiments. - Links: (add repo / documentation link)"
   },
   {
     "objectID": "projects.html#automated-whisker-object-touch-detection-in-3d-usc",
     "href": "projects.html#automated-whisker-object-touch-detection-in-3d-usc",
     "title": "Projects",
     "section": "Automated whisker-object touch detection in 3D (USC)",
-    "text": "Automated whisker-object touch detection in 3D (USC)\nObject touch detection algorithm using 3D behavior monitoring data with occlusion handling.  - Stack: MATLAB, 3D behavior monitoring  - Links: (add repo / documentation link)"
+    "text": "Automated whisker-object touch detection in 3D (USC)\nObject touch detection algorithm using 3D behavior monitoring data with occlusion handling.  - Links: (add repo / documentation link)"
   },
   {
     "objectID": "projects.html#benchmarking-visual-responsiveness-quantification-methods",
@@ -107,14 +107,14 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Jinho Kim",
+    "title": "Posts by Jinho",
     "section": "",
     "text": "About sensory perception and learning.  About inhibitory neurons and cortical circuits.  About image data and signal processing.\nAnd anything else that interests me.\nSee recent projects →"
   },
   {
     "objectID": "index.html#posts",
     "href": "index.html#posts",
-    "title": "Jinho Kim",
+    "title": "Posts by Jinho",
     "section": "Posts",
     "text": "Posts"
   },
