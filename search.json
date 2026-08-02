@@ -4,7 +4,7 @@
     "href": "about.html",
     "title": "About",
     "section": "",
-    "text": "Hi, I’m a neuroscientist studying how the brain encodes, learns, and adapts. That started during my undergraduate and graduate researches on various brain disorders — PTSD, stroke, Alzheimer’s disease — then moved into sensory perception and learning. My current work is on the Cell Types & Learning project at Allen Institute / Neural Dynamics, linking spatial transcriptomics to in vivo neuronal activity during task learning.\nIncreasingly, that work involves developing algorithms for data acquisition, processing, and QC, deploying pipelines to scale, and building ML and agentic AI methods to make sense of large-scale, multimodal neuroscience data.\nRecent focus areas:\n\nIn vivo two-photon imaging, spatial transcriptomics, multimodal data integration (neuronal activity, behavior, gene expression profile)\nRole of inhibitory interneurons in sensory perception and learning\nBuilding image data processing, QC, and analysis pipelines\nGCaMP8 transgenic mice validation and characterization\nAgentic AI-assisted pipeline development"
+    "text": "Hi, I’m a neuroscientist studying how the brain encodes, learns, and adapts. My current work is on the Cell Types & Learning project at Allen Institute / Neural Dynamics, linking spatial transcriptomics to in vivo neuronal activity during task learning.\nIncreasingly, that work involves developing algorithms for data acquisition, processing, and QC, deploying pipelines to scale, and building ML and agentic AI methods to make sense of large-scale, multimodal neuroscience data.\nRecent focus areas:\n\nIn vivo two-photon imaging, spatial transcriptomics, multimodal data integration (neuronal activity, behavior, gene expression profile)\nRole of inhibitory interneurons in sensory perception and learning\nBuilding image data processing, QC, and analysis pipelines\nGCaMP8 transgenic mice validation and characterization\nAgentic AI-assisted pipeline development\n\nPreviously:\n\nPostdoctoral research @ University of Southern California (Hires Lab): Tactile shape perception and learning\nPhD research @ Korea Advanced Institute of Science and Technology (KAIST; Dr. Yong Jeong’s lab): Neurovascular coupling in Alzheimer’s disease\nMaster’s research @ KAIST: Mitochonrial signaling in ROS-induced necrotic cell death\nUndergraduate research @ KAIST: Nonlinear interdependence in EEGs of PTSD patients"
   },
   {
     "objectID": "projects.html",
@@ -107,16 +107,16 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Posts by Jinho",
+    "title": "Technical posts",
     "section": "",
-    "text": "About sensory perception and learning.  About inhibitory neurons and cortical circuits.  About image data and signal processing.\nAnd anything else that interests me.\nSee recent projects →"
+    "text": "See recent projects →"
   },
   {
-    "objectID": "index.html#posts",
-    "href": "index.html#posts",
-    "title": "Posts by Jinho",
-    "section": "Posts",
-    "text": "Posts"
+    "objectID": "index.html#contents",
+    "href": "index.html#contents",
+    "title": "Technical posts",
+    "section": "Contents",
+    "text": "Contents"
   },
   {
     "objectID": "posts/2026-07-paired-plane-decrosstalk/index.html",
