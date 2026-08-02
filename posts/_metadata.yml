@@ -1,0 +1,6 @@
+# Shared settings for all blog posts
+comments:
+  utterances:
+    repo: jkim0731/jkim0731.github.io
+    theme: github-light
+    issue-term: pathname
