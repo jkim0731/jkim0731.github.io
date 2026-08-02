@@ -41,7 +41,6 @@ A running list of shipped artifacts. Each entry links to code and, where possibl
 # Image processing
 ## Automated multimodal co-registration
 Automated co-registration pipeline for _in vivo_ two-photon z-stacks ↔ _ex vivo_ light-sheet 3D volumes / Xenium 2D spatial transcriptomics slices, with a Qt5 QC application. <br>
-- **Stack:** Python, 3D image registration, Qt5, Claude Code <br>
 - **Links:** *(add repo / documentation link)*
 
 ## Crosstalk correction in beam-splitting two-photon microscopy
@@ -54,42 +53,35 @@ Correction protocol for per-cell neuropil contamination in two-photon calcium im
 
 ## DFF calculation for two-photon calcium imaging data
 Fluorescence baseline estimation using iterative reweighted least squares (IRLS) and noise level matching, with a Qt5 QC application. <br>
-- **Stack:** Python, time series, IRLS, Qt5 <br>
 - **Links:** *(add repo / documentation link)*
 
 ## Single cell z-drift QC for two-photon calcium imaging data
 Quantification of single cell-level z-drift in two-photon calcium imaging data. <br>
-- **Stack:** Python, image registration <br>
 - **Links:** *(add repo / documentation link)*
 
 
 # Image acquisition
 ## Online motion correction
 Implementing online motion correction for beam-splitting two-photon imaging, based on the observation of brain swelling during hydration. <br>
-- **Stack:** MATLAB, Python, image registration <br>
 - **Links:** *(add repo / documentation link)*
 
 
 # Spatial transcriptomics
 ## Gene panel selection package for 3D spatial transcriptomics
 Python package *mfishtoolspy* for gene panel selection in 3D spatial transcriptomics - a translation and extension of the R package (mFISHtools) into Python. <br>
-- **Stack:** Python, R, scRNA, spatial transcriptomics, cursor AI <br>
 - **Links:** *(add repo / documentation link)*
 
 ## 3D ROI Quality Classifier
 LightGBM-based classifier on engineered intensity, morphology, shape, and context features, with a retraining architecture tracked in MLflow. (3D HCR ROI) <br>
-- **Stack:** Python, LightGBM, MLflow, CellPose-SAM, feature engineering, human-in-the-loop retraining <br>
 - **Links:** *(add repo / documentation link)*
 
 # Behavior monitoring
 ## Automated pupil tracking 
 Automated pupil tracking pipeline for two-photon imaging experiments.
-- **Stack:** DeepLabCut, LightningPose <br>
 - **Links:** *(add repo / documentation link)*
 
 ## Automated whisker-object touch detection in 3D (USC)
 Object touch detection algorithm using 3D behavior monitoring data with occlusion handling. <br>
-- **Stack:** MATLAB, 3D behavior monitoring <br>
 - **Links:** *(add repo / documentation link)*
 
 
@@ -114,7 +106,5 @@ Template for a new entry:
 ## Project Name
 
 One or two sentences on what it does and the concrete result (a number is better than an adjective).
-
-- **Stack:** key tools/libraries
 - **Links:** repo · writeup · demo
 -->

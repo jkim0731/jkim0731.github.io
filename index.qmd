@@ -1,6 +1,6 @@
 ---
-title: "Jinho Kim"
-subtitle: "Scientist II, Allen Institute / Neural Dynamics"
+title: "Technical posts"
+subtitle: "This is where I share protocol and method developments as soon as they're working. Open science works better when methods don't sit in a drawer until publication."
 listing:
   contents: posts
   sort: "date desc"
@@ -13,14 +13,9 @@ page-layout: full
 title-block-banner: false
 ---
 
-About sensory perception and learning. <br>
-About inhibitory neurons and cortical circuits. <br>
-About image data and signal processing. <br>
 
-
-And anything else that interests me. <br>
 
 
 **[See recent projects →](projects.qmd)**
 
-## Posts
+## Contents

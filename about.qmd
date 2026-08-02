@@ -4,7 +4,7 @@ page-layout: article
 title-block-banner: false
 ---
 
-Hi, I'm a neuroscientist studying how the brain encodes, learns, and adapts. That started during my undergraduate and graduate researches on various brain disorders — PTSD, stroke, Alzheimer's disease — then moved into sensory perception and learning. My current work is on the [Cell Types & Learning project](https://www.allenneuraldynamics.org/projects/cell-types-learning) at Allen Institute / Neural Dynamics, linking spatial transcriptomics to _in vivo_ neuronal activity during task learning.
+Hi, I'm a neuroscientist studying how the brain encodes, learns, and adapts. My current work is on the [Cell Types & Learning project](https://www.allenneuraldynamics.org/projects/cell-types-learning) at Allen Institute / Neural Dynamics, linking spatial transcriptomics to _in vivo_ neuronal activity during task learning.
 
 Increasingly, that work involves developing algorithms for data acquisition, processing, and QC, deploying pipelines to scale, and building ML and agentic AI methods to make sense of large-scale, multimodal neuroscience data.
 
@@ -16,4 +16,9 @@ Recent focus areas:
 - GCaMP8 transgenic mice validation and characterization
 - Agentic AI-assisted pipeline development
 
+Previously:
 
+- Postdoctoral research @ University of Southern California (Hires Lab): Tactile shape perception and learning
+- PhD research @ Korea Advanced Institute of Science and Technology (KAIST; Dr. Yong Jeong's lab): Neurovascular coupling in Alzheimer's disease
+- Master's research @ KAIST: Mitochonrial signaling in ROS-induced necrotic cell death
+- Undergraduate research @ KAIST: Nonlinear interdependence in EEGs of PTSD patients

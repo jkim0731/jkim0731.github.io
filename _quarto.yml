@@ -3,11 +3,11 @@ project:
 
 website:
   title: "Jinho Kim"
-  description: "Computational imaging & imaging ML portfolio"
+  description: "Technical posts on image processing, neuro data analysis, and machine learning"
   navbar:
     left:
       - href: index.qmd
-        text: Posts
+        text: Home
       - href: projects.qmd
         text: Projects
       - href: about.qmd
