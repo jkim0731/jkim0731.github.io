@@ -33,7 +33,8 @@ ones.
 
 This post walks through the problem and the correction we run in production: what the
 crosstalk is and where it comes from, why the obvious fixes don't work, how our
-estimator works, and how well it does — measured against real ground-truth recordings,
+estimator works (minimizing mutual information between the paired planes from the bright ROIs),
+and how well it does — measured against real ground-truth recordings,
 against simulations, and against two off-the-shelf alternatives (naive ICA and suite3d).
 I'll also cover the quality-control tooling we built to catch the rare failures.
 
