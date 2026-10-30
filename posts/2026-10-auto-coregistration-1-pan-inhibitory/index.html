@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Jinho Kim">
+<meta name="dcterms.date" content="2026-10-06">
+<meta name="description" content="A two-step automated coregistration between an in vivo two-photon z-stack and an ex vivo HCR light-sheet volume: image-based rough registration followed by soma-print cell matching with iterative TPS.">
+
+<title>Automated volumetric multimodal coregistration – Jinho Kim</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-c9cd6a6c384a00c1108c2fbf891553a7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Jinho Kim</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../projects.html"> 
+<span class="menu-text">Projects</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/jkim0731/"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/jinho-kim-548a447/"> <i class="bi bi-linkedin" role="img" aria-label="LinkedIn">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://x.com/jkimkj"> <i class="bi bi-twitter-x" role="img" aria-label="X (Twitter)">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://scholar.google.com/citations?user=IcxEW8YAAAAJ&amp;hl=en"> <i class="bi bi-mortarboard-fill" role="img" aria-label="Google Scholar">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#the-problem" id="toc-the-problem" class="nav-link active" data-scroll-target="#the-problem">1. The problem</a></li>
+  <li><a href="#manual-coregistration" id="toc-manual-coregistration" class="nav-link" data-scroll-target="#manual-coregistration">2. Manual coregistration</a></li>
+  <li><a href="#test-dataset" id="toc-test-dataset" class="nav-link" data-scroll-target="#test-dataset">3. Test dataset</a></li>
+  <li><a href="#step-1-rough-registration" id="toc-step-1-rough-registration" class="nav-link" data-scroll-target="#step-1-rough-registration">4. Step 1: rough registration</a></li>
+  <li><a href="#step-2-matching-cells-with-a-soma-print" id="toc-step-2-matching-cells-with-a-soma-print" class="nav-link" data-scroll-target="#step-2-matching-cells-with-a-soma-print">5. Step 2: matching cells with a “soma-print”</a>
+  <ul class="collapse">
+  <li><a href="#filtering-and-iterative-refinement-loop" id="toc-filtering-and-iterative-refinement-loop" class="nav-link" data-scroll-target="#filtering-and-iterative-refinement-loop">Filtering and iterative refinement loop</a></li>
+  </ul></li>
+  <li><a href="#how-well-does-it-work" id="toc-how-well-does-it-work" class="nav-link" data-scroll-target="#how-well-does-it-work">6. How well does it work?</a></li>
+  <li><a href="#manual-qc" id="toc-manual-qc" class="nav-link" data-scroll-target="#manual-qc">7. Manual QC</a></li>
+  <li><a href="#miscellaneous-notes" id="toc-miscellaneous-notes" class="nav-link" data-scroll-target="#miscellaneous-notes">8. Miscellaneous Notes</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Automated volumetric multimodal coregistration</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">coregistration</div>
+    <div class="quarto-category">two-photon imaging</div>
+    <div class="quarto-category">HCR</div>
+    <div class="quarto-category">image registration</div>
+    <div class="quarto-category">spatial transcriptomics</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    A two-step automated coregistration between an in vivo two-photon z-stack and an ex vivo HCR light-sheet volume: image-based rough registration followed by soma-print cell matching with iterative TPS.
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Jinho Kim </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 6, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><strong>Contributors</strong></p>
+<ul>
+<li><strong>Omid Zobeiri</strong> — Development of the manual coregistration protocol.</li>
+<li><strong>Jazmin Campos</strong> — HCR experiments.</li>
+<li><strong>Carson Berry &amp; Matt J. Davis</strong> — HCR data processing.</li>
+</ul>
+<p>The goal of <a href="https://www.allenneuraldynamics.org/projects/cell-types-learning">Cell Types and Learning project</a> at the Allen Institute, Neural Dynamics is to link neuronal function to gene expression. This requires accurately matching cells between in vivo functional imaging and ex vivo gene expression data. Traditionally, this was done manually, but the process is difficult to scale. This post is about automating that process.</p>
+<hr>
+<section id="the-problem" class="level2">
+<h2 class="anchored" data-anchor-id="the-problem">1. The problem</h2>
+<p>We record the activity of the same set of neurons across multiple sessions, on average about 20, across 8 different depths in the primary visual cortex. The key to our study is to identify their transcriptomic profiles. We use intermediate in vivo two-photon z-stack imging to link between individual sessions and the final ex vivo HCR volume.</p>
+<div id="figure-1" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="figures/fig_sessions_to_hcr.jpg" class="img-fluid figure-img"></p>
+<figcaption><strong>Figure 1.</strong> From neuronal activities to cell type. <em>A,</em> two consecutive sessions (N and N+1) of one mouse: mean field of view of each of the 8 planes (target depths 40–320 µm), with ROI outlines colored by the inhibitory subclass of the matched cell. <em>B,</em> the same ROI across sessions (same as in white circles in A) maps to a single cell in the two-photon z-stack, which in turn maps to a single cell in the HCR volume.</figcaption>
+</figure>
+</div>
+<p>The two-photon z-stack covers roughly 400 × 400 x 400 µm of cortex. The HCR volume (cleared, expanded) is about 2.3 × 2.3 mm across and over a millimeter deep, with ~100,000 cells (<a href="#figure-2">Figure 2</a>).</p>
+<div id="figure-2" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="figures/fig_00_problem_overview.jpg" class="img-fluid figure-img"></p>
+<figcaption><strong>Figure 2.</strong> <em>Left:</em> max projection of the in vivo 2p GCaMP z-stack (~400 µm). <em>Right:</em> the HCR volume (405 channel, Rn28S) with the true footprint boxed.</figcaption>
+</figure>
+</div>
+<p>The following describes the main challenges in this multimodal coregistration (<a href="#figure-3">Figure 3</a>):</p>
+<ul>
+<li><strong>Unknown position and orientation.</strong> The FOV is roughly targeted at the center of HCR sample (up to ~200 µm from the center of cleared, expanded tissue), and the patch can be rotated (typically ~180° in our setup) and tilted (typically up to ~15°).</li>
+<li><strong>Anisotropic expansion.</strong> The clearing/expansion step enlarges tissue, and not equally in all directions. From our ground-truth landmarks, depth expands about 1.5× more than the lateral axes.</li>
+<li><strong>Non-rigid warping.</strong> After the best possible global affine fit, cells are still off by 16–43 µm RMS (up to ~114 µm) — larger than a cell body.</li>
+<li><strong>Partial correspondence.</strong> Many cells in one volume simply have no partner in the other (segmentation misses, cells that were out of the imaged range).</li>
+</ul>
+<div id="figure-3" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="figures/fig_01_gt_expansion.jpg" class="img-fluid figure-img"></p>
+<figcaption><strong>Figure 3.</strong> Ground-truth transformations from the manual coregistration results. <em>A,</em> lateral (XY) vs axial (Z) expansion from 2p to HCR. <em>B,</em> pia tilt of each modality. <em>C,</em> in-plane rotation, as deviation from 180°. <em>D,</em> offset of the 2p volume center from the HCR center. <em>E,</em> the non-rigid residual: landmark mismatch left after the best global anisotropic affine fit (RMS and maximum, in µm).</figcaption>
+</figure>
+</div>
+</section>
+<section id="manual-coregistration" class="level2">
+<h2 class="anchored" data-anchor-id="manual-coregistration">2. Manual coregistration</h2>
+<p><strong>(Developed by Omid Zobeiri)</strong></p>
+<p>The manual protocol, using BigWarp, goes like this:</p>
+<ol type="1">
+<li>Find a constellation of 4–6 cells near the surface of the 2p stack with a distinctive pattern.</li>
+<li>Find the matching GFP-positive pattern in the HCR volume. Repeat until you are confident.</li>
+<li>Set these as landmarks and apply a thin-plate-spline (TPS) transform.</li>
+<li>Expand the set of landmarks with visual pattern matching. Until ~50–100 landmarks to cover the volume.</li>
+<li>Use the current warp to propose cell-to-cell matches automatically, then go through <em>every</em> candidate by eye (shape, context, whether accepting it improves local agreement) and add the good ones as new landmarks. Repeat until nothing new appears.</li>
+</ol>
+<p>It works, but it is laborious and requires steep learning curve, preventing scaling up. Only 2 people in our institute know how to do it well.</p>
+</section>
+<section id="test-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="test-dataset">3. Test dataset</h2>
+<p>We used six subjects with manual ground truth, all with sparse <strong>pan-inhibitory</strong> GCaMP expression (GCaMP in inhibitory neurons only).</p>
+<p>Sparse is convenient: in the 2p stack, each labeled cell is isolated and bright, and in HCR we can find the corresponding cells by their GFP signal. We call those <strong>GFP+</strong> cells, and the 2p ↔︎ HCR correspondence lives almost entirely within that population.</p>
+<p>Two supporting pieces made everything else possible:</p>
+<ul>
+<li><strong>An HCR ROI quality classifier.</strong> The HCR segmentation has errors: merged cells, fragments, debris. A LightGBM classifier labels each 3-D ROI as good / bad-but-ok / bad / merged. It’s trained on our own manual labels, uses 405-only features, and reaches a leave-one-subject-out binary AUC of ~0.92. The matcher only considers ROIs the classifier keeps — so it’s a required dependency, not a nicety. Code: <a href="https://github.com/AllenNeuralDynamics/capsule-3D-FISH-ROI-classifier">capsule-3D-FISH-ROI-classifier</a> (inference), <a href="https://github.com/AllenNeuralDynamics/capsule-3D-FISH-ROI-labeling">capsule-3D-FISH-ROI-labeling</a> (interactive labeling), and <a href="https://github.com/AllenNeuralDynamics/capsule-3D-FISH-ROI-classifier-training">capsule-3D-FISH-ROI-classifier-training</a> (training).</li>
+<li><strong>A GFP+ definition.</strong> After comparing several options (including pairwise unmixing, which did <em>not</em> help), the most reliable was a Gaussian-mixture fit on the log of 488 spot density per cell.</li>
+</ul>
+</section>
+<section id="step-1-rough-registration" class="level2">
+<h2 class="anchored" data-anchor-id="step-1-rough-registration">4. Step 1: rough registration</h2>
+<p>The initial rough registration is image-based, classical computer vision approach. It required 4 main steps.</p>
+<p><strong>(1) Surfaces.</strong> We fit the pia (the top surface of the cortex) in both volumes. In each volume, the pia was fit using a 2-D polynomial over the intensity near the top part of the image. In HCR volume, we added iterative reweighted linear squares approach.This gives a common depth coordinate and the relative tilt (up to ~18° between the two).</p>
+<div id="figure-4" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="figures/fig_03_surfaces.jpg" class="img-fluid figure-img"></p>
+<figcaption><strong>Figure 4.</strong> Pia plane fits over side-view projections, defining depth-from-surface in both volumes.</figcaption>
+</figure>
+</div>
+<p><strong>(2) Lateral scale (s<sub>xy</sub>).</strong> How much bigger does a cell look in HCR than in 2p? We estimated it by comparing the cross-sectional areas of corresponding ROIs (all ROIs in 2p volume, GFP+ ROIs in HCR volume). The median cross-sectional area ratio of the ROIs, square-rooted, gave the lateral scale factor similar to the ground-truth value. Note that this approach cannot be used for estimating axial scale due to difference in z resolution between the two imaging modalities (step 4).</p>
+<div id="figure-5" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="figures/fig_04_sxy_roi_area.jpg" class="img-fluid figure-img" style="width:60.0%"></p>
+<figcaption><strong>Figure 5.</strong> Lateral scale from ROI cross-sectional area. Distributions of the xy bounding-box area of all 2p ROIs (n = 1016) and GFP+ HCR ROIs (n = 3721), with their medians (207 and 669 µm²). The lateral scale is s<sub>xy</sub> = √(669 / 207) = 1.80, close to the 1.77 obtained from the ground-truth landmarks.</figcaption>
+</figure>
+</div>
+<p><strong>(3) Top-slab 2-D registration.</strong> Take a slab beneath the pia from each volume, max-project, and register the 2-D images — trying rigid, affine and piecewise-rigid models and keeping the best by normalized cross-correlation against the raw 488 image. This step was devised from the experience with manual procedure - surface had sparse features for human to match easily, which turns out to be useful for automated procedure as well.</p>
+<div id="figure-6" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="figures/fig_05_topslab_reg.jpg" class="img-fluid figure-img"></p>
+<figcaption><strong>Figure 6.</strong> Top-slab 2-D registration. The HCR 488 slab (0–150 µm below the pia) is shown in green and the 2p slab (0–80 µm below the pia) in magenta; overlap appears white. Left to right: the two slabs, their overlay after the rigid fit, and the overlay after piecewise-rigid refinement (NCC 0.09 → 0.18).</figcaption>
+</figure>
+</div>
+<p><strong>(4) Axial scale (s<sub>z</sub>).</strong> We took a side view of the tilt-matched 488 slab, swept s<sub>z</sub>, and found the peak of the FFT-based correlation. Across the six benchmark subjects the peak matched the ground-truth value exactly.</p>
+<div id="figure-7" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="figures/fig_06_sz_fft.jpg" class="img-fluid figure-img" style="width:55.0%"></p>
+<figcaption><strong>Figure 7.</strong> The axial-scale sweep. Slab-wise FFT correlation between the warped 2p stack and the HCR 488 volume as a function of s<sub>z</sub>: mean ± s.d. across 5 slabs, each 100 µm thick. The peak (3.10 for this subject) is the chosen scale.</figcaption>
+</figure>
+</div>
+<p><strong>Overlap crop.</strong> With pose, scales and depth in hand, we only keep HCR cells that could possibly lie within the 2p volume (plus a 10% margin) — cutting the search space roughly 7×. We made this a binding rule for every later stage: <em>nothing operates outside the overlap crop.</em></p>
+<p>The output of Step 1 is not a final answer. In the ground-truth comparison it’s still tens of microns off in places.</p>
+</section>
+<section id="step-2-matching-cells-with-a-soma-print" class="level2">
+<h2 class="anchored" data-anchor-id="step-2-matching-cells-with-a-soma-print">5. Step 2: matching cells with a “soma-print”</h2>
+<p>Soma-print, from <a href="https://www.biorxiv.org/content/10.64898/2026.04.28.719500v1.full.pdf">(Wang, Jiang, Sun et al., 2026)</a>, was the real breakthrough. Their approach (TRU-FACT) was to align in vivo and ex vivo imaging optically as much as possible, and to use soma-print as ROI matching quantification. Soma-print works great when the initial registration is reasonably accurate (this is the whole reason we needed step 1).</p>
+<p>The main idea in our work is to use this as a tool for nonrigid (fine) registration. Main updates in implementation are: (1) making it a 3D version (<a href="#figure-8">Figure 8</a>), (2) additional filtering using mutual-best match, local flow coherence, and anchor vote (<a href="#movie-1">Movie 1</a>) (3) incorporating it into an iterative refinement loop (inspired from the manual procedure).</p>
+<div id="figure-8" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="figures/fig_08_somaprint_concept.jpg" class="img-fluid figure-img"></p>
+<figcaption><strong>Figure 8.</strong> The soma-print idea on real geometry: each cell is described by its neighbor-vector constellation, and two cells are compared by their best-matching vector pairs.</figcaption>
+</figure>
+</div>
+<section id="filtering-and-iterative-refinement-loop" class="level3">
+<h3 class="anchored" data-anchor-id="filtering-and-iterative-refinement-loop">Filtering and iterative refinement loop</h3>
+<p>Soma-print is not a robust matcher when the modalities are not well-aligned (as opposed to how it was used in TRU-FACT). The following steps are designed to improve its reliability in our pipeline:</p>
+<ol type="1">
+<li><strong>Wide candidate radius.</strong> For each 2p cell, consider all HCR cells within 150 µm — the best soma-print match is often <em>not</em> the nearest neighbor.</li>
+<li><strong>Mutual-best.</strong> Keep a pair only if each cell is the other’s top choice.</li>
+<li><strong>Round-0 local-flow filter.</strong> In the first round only, drop pairs whose displacement disagrees with their neighbors’.</li>
+<li><strong>Anchor vote.</strong> Keep a pair only if at least 3 of its 5 soma-neighbors are also confidently matched.</li>
+<li><strong>Fit, warp, repeat.</strong> Fit a thin-plate spline to the accepted pairs, re-warp the 2p cells, and match again. Each round improves the warp, and new pairs appear at the edges. On the example subject: 667 → 692 → 698 pairs, then it converges.</li>
+<li><strong>Final polish.</strong> After the loop converges, rebuild each 2p cell’s descriptor from its 10 nearest <strong>accepted pairs</strong>, and pair all 2p cells again with the same filters. This added about 1.5% matches.</li>
+</ol>
+<div id="movie-1">
+<video src="figures/mov_auto_4_matcher.mp4" controls="" preload="metadata" style="width:100%">
+</video>
+<p><strong>Movie 1.</strong> The customized matcher on real cells: wide candidate search → mutual-best → local-flow filter → anchor vote → iterate with TPS. Use the player controls to pause and scrub.</p>
+</div>
+</section>
+</section>
+<section id="how-well-does-it-work" class="level2">
+<h2 class="anchored" data-anchor-id="how-well-does-it-work">6. How well does it work?</h2>
+<p>Against our ground truth, <strong>recall is 0.87–0.97</strong> across the six subjects. A part of the loss is due to not having ROI quality filtering in the manual processing (which led to false positives). Precision is more complicated: a number of the “false positives” look like genuine matches missed in the manual process. So our precision numbers are a lower bound.</p>
+<div id="figure-9" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="figures/fig_10_final_matches.jpg" class="img-fluid figure-img"></p>
+<figcaption><strong>Figure 9.</strong> Final matches on subject 790322 over the HCR 488 projection (698 pairs, 676 of which agree with the independent manual table), and the displacement field that matching + TPS resolved.</figcaption>
+</figure>
+</div>
+<p>And here is the full result — the TPS-warped 2p stack overlaid on the HCR 488 volume, scrolling down from the pia:</p>
+<div id="movie-2">
+<video src="figures/mov_auto_5_result.mp4" controls="" preload="metadata" style="width:100%">
+</video>
+<p><strong>Movie 2.</strong> Final registration: 2p (magenta) over HCR 488 (cyan), with matched cells accumulating as gold circles. Use the player controls to pause and scrub.</p>
+</div>
+</section>
+<section id="manual-qc" class="level2">
+<h2 class="anchored" data-anchor-id="manual-qc">7. Manual QC</h2>
+<p>As a last step, we added a QC app. It presents matches least-confident-first for pass/fail, lets you add or fix a pair manually with a live re-warp, and exports the final coregistration table. The source repository of the QC app (a Code Ocean interactive capsule) is <a href="https://github.com/AllenNeuralDynamics/interactive-capsule-2p-3DFISH-autocoreg-QC">interactive-capsule-2p-3DFISH-autocoreg-QC</a>.</p>
+<p>At least in the 6 subjects we tested, the automated algorithm worked well - manual correction was only at around 10 ROIs out of several hundred per subject.</p>
+<div id="figure-10" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="figures/qc_app_overview.png" class="img-fluid figure-img"></p>
+<figcaption><strong>Figure 10.</strong> The QC app GUI.</figcaption>
+</figure>
+</div>
+</section>
+<section id="miscellaneous-notes" class="level2">
+<h2 class="anchored" data-anchor-id="miscellaneous-notes">8. Miscellaneous Notes</h2>
+<ul>
+<li>This protocol is now used in production in the Allen Institute, for projects across Brain Science and Neural Dynamics.</li>
+<li>The same approach was applied to other datasets with similar success (pan-neuronal GCaMP and Xenium - follow up posts).</li>
+<li>Prior experience with manual procedure was critical in giving insights to designing the automated pipeline.</li>
+<li>Most of the pipeline was developed using Claude Code.
+<ul>
+<li>Initial attempt for asking the agent to figure out the solution failed. (Note: main development was done around May 2026.)</li>
+<li>Image processing problem seems unique in a sense that a hallucination is easy to check visually. Producing intermediate images for each step helped catch errors early.</li>
+<li>Making videos for explaining each step became much easier and fun. It helped communicate the process clearly to others.</li>
+</ul></li>
+<li>We are currently exploring the process to recover more matches (Being led by <strong>Matt J. Davis</strong>)
+<ul>
+<li>The current approach is ROI-to-ROI matching. This depends on the ROI detection quality. ROI detection in the structural z-stack seems to be the main bottleneck. The cause seems to be two-fold: (1) some inactive neurons during the structural z-stack acquisition, and (2) low SNR especially in deeper planes.</li>
+<li>By directly registering FOV to HCR, we can recover more matches. We can do this by using chained transformations from FOV to zstack and zstack to HCR.</li>
+</ul></li>
+</ul>
+<p><strong><a href="../../posts/2026-10-auto-coregistration-2-pan-neuronal/index.html">→ Part 2: pan-neuronal</a></strong></p>
+<hr>
+<p><em>Code: <a href="https://github.com/jkim0731/2p2fish">github.com/jkim0731/2p2fish</a> (the <code>autocoreg</code> package) and <a href="https://github.com/jkim0731/mfish-roi-classifier">github.com/jkim0731/mfish-roi-classifier</a>.</em></p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/jkim0731\.github\.io\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<input type="hidden" id="giscus-base-theme" value="light">
+<input type="hidden" id="giscus-alt-theme" value="light">
+<script>
+  function loadGiscus() {
+    // Function to get the theme based on body class
+    const getTheme = () => {
+      let baseTheme = document.getElementById('giscus-base-theme').value;
+      let altTheme = document.getElementById('giscus-alt-theme').value;
+      return document.body.classList.contains('quarto-dark') ? altTheme : baseTheme;
+    };
+    const script = document.createElement("script");
+    script.src = "https://giscus.app/client.js";
+    script.async = true;
+    script.dataset.repo = "jkim0731/jkim0731.github.io";
+    script.dataset.repoId = "R_kgDOTpjvRQ";
+    script.dataset.category = "Announcements";
+    script.dataset.categoryId = "DIC_kwDOTpjvRc4DCfjq";
+    script.dataset.mapping = "pathname";
+    script.dataset.reactionsEnabled = "1";
+    script.dataset.emitMetadata = "0";
+    script.dataset.inputPosition = "bottom";
+    script.dataset.theme = getTheme();
+    script.dataset.lang = "en";
+    script.crossOrigin = "anonymous";
+    // Append the script to the desired div instead of at the end of the body
+    document.getElementById("quarto-content").appendChild(script);
+  }
+  loadGiscus();
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
